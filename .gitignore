@@ -1,0 +1,6 @@
+env/
+__pycache__/
+.vscode/
+.gcloudignore
+**/.DS_Store
+app/data/api_auth.json
