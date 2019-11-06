@@ -14,21 +14,14 @@ def log(text):
     log_string += text
 
 def get_distance(lat1, lon1, lat2, lon2):
-    R = 6371.000    #average radius of earth in km
-    
-    #convert to radians
+    R = 6371.000 
     lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
-
-    #calculate difference
     dlat = lat2 - lat1
     dlon = lon2 - lon1
-
-    #use haversine formula to calculate distance
     a = sin(dlat/2)**2  + cos(lat1) * cos(lat2) * sin(dlon/2)**2
     c = 2 * asin(sqrt(a))
     return R * c
 
-#Call FlightAware API to determine aircraft for each flight
 def get_aircraft_inf(row, aircraft_df, api_creds):
     flight_id = row['Flight ID']
     request_url = f'{constant.API_ENDPOINT}{flight_id}'
