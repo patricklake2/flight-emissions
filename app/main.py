@@ -109,6 +109,6 @@ else:
     departures['Distance (km)'] = departures.apply(lambda row: round(row['Distance (km)'], 2), axis=1)
     departures['Emissions (kgCO2)'] = departures.apply(lambda row: round(row['Emissions (kgCO2)'], 2), axis=1)
     filename = f'flight-data/{today.strftime("%d-%m-%y")}.json'
-    departures.to_json(filename, orient='records')
+    departures.to_json(filename, orient='records', lines=True)
     log('Saved to json file')
 #log_filename = f'{today.strftime("%d-%m-%y")}-log.txt'
