@@ -71,6 +71,18 @@ def get_flight_type(row):
     else:
         return 'LongHaul'
 
+def create_json(df, filename):
+    output = {}
+    output['Date'] = date.today().strftime('%Y-%m-%d')
+    items = []
+    for _,row in df.iterrows():
+        item = {}
+        for prop in df.columns.values:
+            item[prop] = row[prop]
+        items.append(item)
+    output['Flights'] = items
+    with open(filename, 'w+') as fp:
+        json.dump(output, fp, indent=2)
 
 #main
 log(f'Requesting departures data from {constant.DEPARTURES_URL}\n')
@@ -113,6 +125,6 @@ else:
     departures['Distance (km)'] = departures.apply(lambda row: round(row['Distance (km)'], 2), axis=1)
     departures['Emissions (kgCO2)'] = departures.apply(lambda row: round(row['Emissions (kgCO2)'], 2), axis=1)
     export_path = os.path.join(working_dir, f'flight-data/{today.strftime("%Y-%m-%d")}.json')
-    departures.to_json(export_path, orient='records')
+    create_json(departures, export_path)
     log('Saved to json file')
 #log_filename = f'{today.strftime("%d-%m-%y")}-log.txt'
