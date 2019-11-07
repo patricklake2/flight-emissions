@@ -89,16 +89,20 @@ else:
     departures = departures.loc[:,['flight_ident','scheduled_time','airport_name','airport_iata']]
     departures.columns = ['Flight ID','Time','Destination','IATA']
 
-    airports = pd.read_csv('app/data/airports.csv')
+    working_dir = os.path.join(os.path.dirname(__file__), '..')
+    airports = pd.read_csv(os.path.join(working_dir, 'app/data/airports.csv'))
+    aircraft = pd.read_csv(os.path.join(working_dir, 'app/data/aircraft.csv'))
+    # airports = pd.read_csv('app/data/airports.csv')
+    # aircraft = pd.read_csv('app/data/aircraft.csv')
+
     departures = pd.merge(departures, airports, how='left', on='IATA')
-    aircraft = pd.read_csv('app/data/aircraft.csv')
 
     lba_lat = (float)(airports['Lat'][airports['IATA'] == 'LBA'])
     lba_lon = (float)(airports['Lon'][airports['IATA'] == 'LBA'])
     departures['Distance (km)'] = departures.apply(lambda row: get_distance(lba_lat, lba_lon, row.Lat, row.Lon), axis=1)
     departures['Flight Type'] = departures.apply(get_flight_type, axis=1)
     
-    with open('app/data/api_auth.json') as fp:
+    with open(os.path.join(working_dir, 'app/data/api_auth.json')) as fp:
         credentials = json.load(fp)
     departures[['Aircraft Code', 'Aircraft Name', 'Emissions Factor']] = departures.apply(get_aircraft_inf, args=[aircraft, credentials], axis=1, result_type='expand')
     departures['Emissions (kgCO2)'] = departures.apply(lambda row: row['Distance (km)'] * row['Emissions Factor'], axis=1)
@@ -108,7 +112,8 @@ else:
     departures['Lon'] = departures.apply(lambda row: round(row['Lon'], 5), axis=1)
     departures['Distance (km)'] = departures.apply(lambda row: round(row['Distance (km)'], 2), axis=1)
     departures['Emissions (kgCO2)'] = departures.apply(lambda row: round(row['Emissions (kgCO2)'], 2), axis=1)
-    filename = f'flight-data/{today.strftime("%d-%m-%y")}.json'
-    departures.to_json(filename, orient='records')
+    export_name = f'{today.strftime("%Y-%m-%d")}.json'
+    export_path = os.path.join(working_dir, 'flight-data', export_name)
+    departures.to_json(export_path, orient='records')
     log('Saved to json file')
 #log_filename = f'{today.strftime("%d-%m-%y")}-log.txt'
