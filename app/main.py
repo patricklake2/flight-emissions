@@ -101,7 +101,8 @@ else:
     departures = departures.loc[:,['flight_ident','scheduled_time','airport_name','airport_iata']]
     departures.columns = ['Flight ID','Time','Destination','IATA']
 
-    working_dir = os.path.join(os.path.dirname(__file__), '..')
+    # working_dir = os.path.join(os.path.dirname(__file__), '..')
+    working_dir = os.path.dirname(os.path.dirname(__file__))
     airports = pd.read_csv(os.path.join(working_dir, 'app/data/airports.csv'))
     aircraft = pd.read_csv(os.path.join(working_dir, 'app/data/aircraft.csv'))
     # airports = pd.read_csv('app/data/airports.csv')
