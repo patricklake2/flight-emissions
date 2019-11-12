@@ -26,8 +26,8 @@
         </header>
         <div class="container">
             <bubble v-bind:description='"flights today"' v-bind:content='numberFlights'></bubble>
+            <bubble v-bind:description='"km travelled"' v-bind:content='distanceTravelled'></bubble>
             <bubble v-bind:description='"kg tonnes of CO2 emissions"' v-bind:content='totalEmissions'></bubble>
-            <bubble v-bind:description='"(something else here)"' v-bind:content='0'></bubble>
         </div>
         <vtable v-bind:columns="['Time','Destination','Emissions (kgCO2)']" v-bind:items="flights"></vtable>
     </div>

@@ -80,9 +80,7 @@ var dashboard = new Vue({
             }
         ],
         date: null,
-        flights: [],
-        displayNum: 1,
-        targetNum: 5000
+        flights: []
     },
     computed: {
         totalEmissions: function() {
@@ -93,7 +91,13 @@ var dashboard = new Vue({
             return total
         },
         numberFlights: function() { return this.flights.length; },
-        distanceTravelled: function() {}
+        distanceTravelled: function() {
+            var dist = 0;
+            for (flight of this.flights) {
+                dist += flight['Distance (km)']
+            }
+            return dist;
+        }
     },
     mounted() {
         axios.get('https://raw.githubusercontent.com/patricklake2/flight-emissions/master/flight-data/2019-11-08.json?token=AMSNISOUAKJ2UOXSF6Q3SUC52J5KI').then(response => {

@@ -2,7 +2,7 @@
 This is a fairly simple app I built, which monitors daily flight departures from Leeds Bradford Airport, then estimates the emissions for each flight.
 
 ## Background
-Flying is incredibly carbon-intensive, but international flights **are not** included in the UK's national. or local emission figures.
+Flying is incredibly carbon-intensive, but international flights **are not** included in the UK's national, or local emission figures.
 This aims to raise a bit of awareness about the real cost of flying - especially at a time when an airport expansion is being discussed.
 
 ## Data
