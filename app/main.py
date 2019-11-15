@@ -37,32 +37,34 @@ def get_aircraft_inf(row, aircraft_df, api_creds):
         results_json = api_response.json()
         try:
             code = results_json['FlightInfoExResult']['flights'][0]['aircrafttype']
+            log(f'Returned aircraft code {code}\n')
         except KeyError:
+            code = ''
             log(f'No results from FlightAware for flight {flight_id}')
             name = '(no match)'
             factor = constant.AVE_FACTORS[row['Flight Type']]
 
-        log(f'Returned aircraft code {code}\n')
-        matches = aircraft_df[aircraft_df['Aircraft_Code'] == code]
-        number_matches = len(matches)
+        if not code == '':
+            matches = aircraft_df[aircraft_df['Aircraft_Code'] == code]
+            number_matches = len(matches)
 
-        if number_matches == 0:
-            log(f'No matches in DB for aircraft {code}, using average emissions factor for flight type\n\n')
-            name = '(no match)'
-            factor = constant.AVE_FACTORS[row['Flight Type']]
+            if number_matches == 0:
+                log(f'No matches in DB for aircraft {code}, using average emissions factor for flight type\n\n')
+                name = '(no match)'
+                factor = constant.AVE_FACTORS[row['Flight Type']]
 
-        elif number_matches == 1:
-            factor = matches['Emissions_factor'].values[0]
-            name = matches.Plane.values[0]
-            plane_ftype = matches.Type.values[0]
-            log(f'Matched aircraft to {name} (normal usage - {plane_ftype})\n\n')
+            elif number_matches == 1:
+                factor = matches['Emissions_factor'].values[0]
+                name = matches.Plane.values[0]
+                plane_ftype = matches.Type.values[0]
+                log(f'Matched aircraft to {name} (normal usage - {plane_ftype})\n\n')
 
-        elif number_matches > 1:
-            newMatches = matches[matches['Type'] == row['Flight Type']]
-            factor = newMatches['Emissions_factor'].values[0]
-            name = newMatches.Plane.values[0]
-            plane_ftype = newMatches.Type.values[0]
-            log(f'Matched aircraft to {name} (normal usage - {plane_ftype})\n\n')
+            elif number_matches > 1:
+                newMatches = matches[matches['Type'] == row['Flight Type']]
+                factor = newMatches['Emissions_factor'].values[0]
+                name = newMatches.Plane.values[0]
+                plane_ftype = newMatches.Type.values[0]
+                log(f'Matched aircraft to {name} (normal usage - {plane_ftype})\n\n')
     
     return code, name, factor
 
