@@ -106,7 +106,7 @@ else:
     departures = pd.DataFrame(departures_today)
     log(f'Retrieved {len(departures)} flights\n\n')
     departures = departures.loc[:,['flight_ident','scheduled_time', 'airline', 'airport_name','airport_iata']]
-    departures.columns = ['Flight ID', 'Airline', 'Time','Destination','IATA']
+    departures.columns = ['Flight ID','Time', 'Airline', 'Destination','IATA']
 
     # working_dir = os.path.join(os.path.dirname(__file__), '..')
     working_dir = os.path.dirname(os.path.dirname(__file__))
