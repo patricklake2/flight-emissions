@@ -3,7 +3,8 @@
   "Flights": [
     {
       "Flight ID": "BE736",
-      "Time": "2019-11-15 13:35:00",
+      "Airline": "2019-11-15 13:35:00",
+      "Time": "flybe",
       "Destination": "Belfast City",
       "IATA": "BHD",
       "Lat": 54.6181,
@@ -19,7 +20,8 @@
     },
     {
       "Flight ID": "LS243",
-      "Time": "2019-11-15 15:15:00",
+      "Airline": "2019-11-15 15:15:00",
+      "Time": "Jet2.com",
       "Destination": "Tenerife South",
       "IATA": "TFS",
       "Lat": 28.0445,
@@ -35,7 +37,8 @@
     },
     {
       "Flight ID": "FR9079",
-      "Time": "2019-11-15 15:40:00",
+      "Airline": "2019-11-15 15:40:00",
+      "Time": "Ryanair",
       "Destination": "Alicante",
       "IATA": "ALC",
       "Lat": 38.2822,
@@ -51,7 +54,8 @@
     },
     {
       "Flight ID": "EI3393",
-      "Time": "2019-11-15 15:40:00",
+      "Airline": "2019-11-15 15:40:00",
+      "Time": "Aer Lingus",
       "Destination": "Dublin",
       "IATA": "DUB",
       "Lat": 53.4213,
@@ -67,7 +71,8 @@
     },
     {
       "Flight ID": "BE7606",
-      "Time": "2019-11-15 16:10:00",
+      "Airline": "2019-11-15 16:10:00",
+      "Time": "flybe",
       "Destination": "Southampton",
       "IATA": "SOU",
       "Lat": 50.9503,
@@ -83,7 +88,8 @@
     },
     {
       "Flight ID": "LS205",
-      "Time": "2019-11-15 16:30:00",
+      "Airline": "2019-11-15 16:30:00",
+      "Time": "Jet2.com",
       "Destination": "Amsterdam",
       "IATA": "AMS",
       "Lat": 52.3086,
@@ -99,7 +105,8 @@
     },
     {
       "Flight ID": "LS273",
-      "Time": "2019-11-15 16:40:00",
+      "Airline": "2019-11-15 16:40:00",
+      "Time": "Jet2.com",
       "Destination": "Alicante",
       "IATA": "ALC",
       "Lat": 38.2822,
@@ -115,7 +122,8 @@
     },
     {
       "Flight ID": "BE738",
-      "Time": "2019-11-15 16:55:00",
+      "Airline": "2019-11-15 16:55:00",
+      "Time": "flybe",
       "Destination": "Belfast City",
       "IATA": "BHD",
       "Lat": 54.6181,
@@ -131,7 +139,8 @@
     },
     {
       "Flight ID": "KL1550",
-      "Time": "2019-11-15 17:15:00",
+      "Airline": "2019-11-15 17:15:00",
+      "Time": "KLM",
       "Destination": "Amsterdam",
       "IATA": "AMS",
       "Lat": 52.3086,
@@ -147,7 +156,8 @@
     },
     {
       "Flight ID": "BA1345",
-      "Time": "2019-11-15 18:00:00",
+      "Airline": "2019-11-15 18:00:00",
+      "Time": "British Airways",
       "Destination": "London Heathrow",
       "IATA": "LHR",
       "Lat": 51.4706,
@@ -163,7 +173,8 @@
     },
     {
       "Flight ID": "FR4107",
-      "Time": "2019-11-15 18:55:00",
+      "Airline": "2019-11-15 18:55:00",
+      "Time": "Ryanair",
       "Destination": "Wroclaw",
       "IATA": "WRO",
       "Lat": 51.1027,
@@ -179,7 +190,8 @@
     },
     {
       "Flight ID": "EI3395",
-      "Time": "2019-11-15 19:00:00",
+      "Airline": "2019-11-15 19:00:00",
+      "Time": "Aer Lingus",
       "Destination": "Dublin",
       "IATA": "DUB",
       "Lat": 53.4213,
@@ -195,7 +207,8 @@
     },
     {
       "Flight ID": "FR157",
-      "Time": "2019-11-15 19:35:00",
+      "Airline": "2019-11-15 19:35:00",
+      "Time": "Ryanair",
       "Destination": "Dublin",
       "IATA": "DUB",
       "Lat": 53.4213,
@@ -211,7 +224,8 @@
     },
     {
       "Flight ID": "BE740",
-      "Time": "2019-11-15 20:00:00",
+      "Airline": "2019-11-15 20:00:00",
+      "Time": "flybe",
       "Destination": "Belfast City",
       "IATA": "BHD",
       "Lat": 54.6181,

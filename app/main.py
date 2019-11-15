@@ -105,8 +105,8 @@ else:
     departures_today = [x for x in departures_json if x['scheduled_time'][0:10] == today.strftime("%Y-%m-%d")]
     departures = pd.DataFrame(departures_today)
     log(f'Retrieved {len(departures)} flights\n\n')
-    departures = departures.loc[:,['flight_ident','scheduled_time','airport_name','airport_iata']]
-    departures.columns = ['Flight ID','Time','Destination','IATA']
+    departures = departures.loc[:,['flight_ident','scheduled_time', 'airline', 'airport_name','airport_iata']]
+    departures.columns = ['Flight ID', 'Airline', 'Time','Destination','IATA']
 
     # working_dir = os.path.join(os.path.dirname(__file__), '..')
     working_dir = os.path.dirname(os.path.dirname(__file__))

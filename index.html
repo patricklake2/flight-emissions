@@ -42,7 +42,7 @@
         <div class="buttons-holder">
             <button v-on:click="view = 'map'">Map</button>
             <button v-on:click="view = 'table'">Table</button>
-            <button><a href="https://google.com">Raw JSON</a></button>
+            <button><a v-bind:href="dataUrl">Raw JSON</a></button>
         </div>
 
     </div>

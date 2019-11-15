@@ -142,9 +142,10 @@ var dashboard = new Vue({
         VTable, NumberBubble, AnimatedNumber, Map
     },
     data: {
-        date: null,
+        date: new Date(),
+        dataUrl: null,
         flights: [],
-        view: 'map'
+        view: 'map',
     },
     computed: {
         totalEmissions: function () {
@@ -164,7 +165,9 @@ var dashboard = new Vue({
         }
     },
     mounted() {
-        axios.get('https://raw.githubusercontent.com/patricklake2/leeds-flight-emissions/master/flight-data/2019-11-08.json?token=AMSNISOWMV3UY2ACHE7WNC25222UA').then(response => {
+        var isoDate = this.date.toISOString().substring(0, 10)
+        this.dataUrl = 'https://raw.githubusercontent.com/patricklake2/leeds-flight-emissions/master/flight-data/' + isoDate + '.json?token=AMSNISPWENM3VZEFWFVAYFK5274WK'
+        axios.get(this.dataUrl).then(response => {
             this.date = response.data['Date'];
             this.flights = response.data['Flights']
         })
