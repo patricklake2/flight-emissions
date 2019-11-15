@@ -40,8 +40,8 @@
             <p v-if="view === 'json'">{{ flights }}</p>
         </div>
         <div class="buttons-holder">
-            <button v-on:click="view = 'map'">Map</button>
-            <button v-on:click="view = 'table'">Table</button>
+            <button v-on:click="view = 'map'" v-bind:class="{'active':(view === 'map')}">Map</button>
+            <button v-on:click="view = 'table'" v-bind:class="{'active':(view === 'table')}">Table</button>
             <button><a v-bind:href="dataUrl">Raw JSON</a></button>
         </div>
 
