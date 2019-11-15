@@ -16,24 +16,35 @@
     <script src="resources/leaflet/rotatemarker.js"></script>
     <script src="resources/dashboard.js" defer></script>
 </head>
+
 <body>
     <div id="app">
         <header>
             <img src="resources/odi-logo.png" width="200px">
             <h1>Leeds' Flight Emissions</h1>
             <ul>
-                <li v-for="page in pages">
-                    <a v-bind:href="page.link">{{ page.text }}</a>
-                </li>
+                <li><a href="index.html">home</a></li>
+                <li><a href="pages/about.html">about</a></li>
+                <li><a href="https://github.com/patricklake2/leeds-flight-emissions">github</a></li>
+                <li><a href="https://odileeds.org">odiLeeds</a></li>
             </ul>
         </header>
-        <div class="container">
+        <div class="flexbox">
             <bubble v-bind:caption='"flights today"' v-bind:value='numberFlights'></bubble>
             <bubble v-bind:caption='"km travelled"' v-bind:value='distanceTravelled'></bubble>
             <bubble v-bind:caption='"kg of CO2 emissions"' v-bind:value='totalEmissions'></bubble>
         </div>
-        <!-- <vtable v-bind:columns="['Time','Destination','Emissions (kgCO2)']" v-bind:items="flights"></vtable> -->
-        <v-map v-bind:items="flights"></v-map>
+        <div class="main-holder">
+            <v-map v-if="view === 'map'" v-bind:items="flights"></v-map>
+            <vtable v-if="view === 'table'" v-bind:columns="['Time','Destination','Emissions (kgCO2)']" v-bind:items="flights"></vtable>
+            <p v-if="view === 'json'">{{ flights }}</p>
+        </div>
+        <div class="buttons-holder">
+            <button v-on:click="view = 'map'">Map</button>
+            <button v-on:click="view = 'table'">Table</button>
+            <button><a href="https://google.com">Raw JSON</a></button>
+        </div>
+
     </div>
 </body>
 

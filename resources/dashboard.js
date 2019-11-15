@@ -53,8 +53,9 @@ const NumberBubble = Vue.component('bubble', {
     template: '<div class="bubble"><h2><animated-integer v-bind:value="value"></animated-integer></h2><p v-if="caption">{{ caption }}</p></div>'
 })
 
+
 const Map = Vue.component('v-map', {
-    template: '<div class="map-holder"><div v-if="items" id="flight-map"></div></div>',
+    template: '<div class="main-holder"><div v-if="items" id="flight-map"></div></div>',
     data: function () {
         return {
             mymap: null,
@@ -91,7 +92,6 @@ const Map = Vue.component('v-map', {
                     this.destinationlayer.clearLayers()
                 }
                 for (flight of this.items) {
-                    // var bearing = this.getBearing(this.startLat, this.startLon, flight['Lat'], flight['Lon'])
                     var bearing = this.getBearing(flight['Lat'], flight['Lon'], this.startLat, this.startLon)
                     var iconSvg = this.getSvgUrl(bearing)
                     var icon = L.icon({
@@ -111,23 +111,23 @@ const Map = Vue.component('v-map', {
             }
         },
         getBearing(lat1, lon1, lat2, lon2) {
-            lat1 = this.radians(lat1), lon1 = this.radians(lon1), lat2 = this.radians(lat2), lon2 = this.radians(lon2);
+            var degrees = function(rad) {
+                var pi = Math.PI;
+                return rad * (180 / pi);
+            }
+            var radians = function(deg) {
+                var pi = Math.PI;
+                return deg * (pi / 180);
+            }
+            lat1 = radians(lat1), lon1 = radians(lon1), lat2 = radians(lat2), lon2 = radians(lon2);
             var y = Math.sin(lon2 - lon1) * Math.cos(lat2);
             var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1);
             var brng = Math.atan2(y, x);
-            var deg = this.degrees(brng)
+            var deg = degrees(brng)
             var normalised = (deg + 360) % 360;
             normalised = Math.round(normalised * 100) / 100;
             reverse = (normalised + 180) % 360;
             return reverse;
-        },
-        degrees(rad) {
-            var pi = Math.PI;
-            return rad * (180 / pi);
-        },
-        radians(deg) {
-            var pi = Math.PI;
-            return deg * (pi / 180);
         },
         getSvgUrl(rotationAngle) {
             var svg = this.svgStart + rotationAngle.toString() + this.svgEnd;
@@ -142,26 +142,9 @@ var dashboard = new Vue({
         VTable, NumberBubble, AnimatedNumber, Map
     },
     data: {
-        pages: [
-            {
-                text: 'home',
-                link: 'index.html'
-            },
-            {
-                text: 'about',
-                link: 'pages/about.html'
-            },
-            {
-                text: 'github',
-                link: 'https://github.com'
-            },
-            {
-                text: 'odi leeds',
-                link: 'https://odileeds.org'
-            }
-        ],
         date: null,
-        flights: []
+        flights: [],
+        view: 'map'
     },
     computed: {
         totalEmissions: function () {
