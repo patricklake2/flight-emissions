@@ -77,6 +77,18 @@ a:visited {
     margin: 0px auto;
 }
 
+.map-holder {
+    width: 100vw;
+    text-align: center;
+}
+
+#flight-map {
+    height: 100vh;
+    width: 70vw;
+    margin: 0px 15vw;
+    display: inline-block;
+}
+
 .fixed_headers {
     width: 90vw;
     table-layout: fixed;
