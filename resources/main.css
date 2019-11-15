@@ -80,6 +80,7 @@ a:visited {
 .map-holder {
     width: 100vw;
     text-align: center;
+    margin: 40px 0px;
 }
 
 #flight-map {

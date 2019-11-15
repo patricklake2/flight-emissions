@@ -55,22 +55,18 @@ const NumberBubble = Vue.component('bubble', {
 
 const Map = Vue.component('v-map', {
     template: '<div class="map-holder"><div v-if="items" id="flight-map"></div></div>',
-    data: function() {
+    data: function () {
         return {
             mymap: null,
             destinationlayer: null,
             icon: null,
             startLat: 53.86589,
             startLon: -1.66057,
-            svg: '<?xml version="1.0" encoding="UTF-8"?><svg version="1.1" id="airport-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15"><path id="path7712-0" d="M15,6.8182L15,8.5l-6.5-1&#xA;&#x9;l-0.3182,4.7727L11,14v1l-3.5-0.6818L4,15v-1l2.8182-1.7273L6.5,7.5L0,8.5V6.8182L6.5,4.5v-3c0,0,0-1.5,1-1.5s1,1.5,1,1.5v2.8182&#xA;&#x9;L15,6.8182z"/></svg>'
+            svgStart: '<?xml version="1.0" encoding="UTF-8"?><svg version="1.1" id="airport-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15" transform="rotate(',
+            svgEnd: ')"><path id="path7712-0" d="M15,6.8182L15,8.5l-6.5-1&#xA;&#x9;l-0.3182,4.7727L11,14v1l-3.5-0.6818L4,15v-1l2.8182-1.7273L6.5,7.5L0,8.5V6.8182L6.5,4.5v-3c0,0,0-1.5,1-1.5s1,1.5,1,1.5v2.8182&#xA;&#x9;L15,6.8182z"/></svg>'
         }
     },
     props: ['items'],
-    computed: {
-        svgUrl: function() {
-            return 'data:image/svg+xml;base64,' + btoa(this.svg);
-        }
-    },
     watch: {
         items(newVal, prevVal) {
             this.addDests()
@@ -84,31 +80,58 @@ const Map = Vue.component('v-map', {
             id: 'mapbox.streets',
             accessToken: 'pk.eyJ1IjoicGF0cmljay1sYWtlIiwiYSI6ImNrMnl4Z2c1eDAycmgzb3A2cHVhdTVjancifQ.K5-h5nZk-onKDRbJmIQmHg'
         }).addTo(this.mymap);
-        this.icon = L.icon({
-            iconUrl: this.svgUrl,
-            iconSize: [22,22],
-            iconAnchor: [11,0]
-        }) 
         var leeds = L.marker([this.startLat, this.startLon]).addTo(this.mymap);
         leeds.bindPopup("<b>Leeds Bradford Airport</b>").openPopup();
         this.destinationlayer = L.layerGroup().addTo(this.mymap)
     },
     methods: {
         addDests() {
-            if(this.mymap) {
+            if (this.mymap) {
                 if (this.destinationlayer) {
                     this.destinationlayer.clearLayers()
                 }
-                for(flight of this.items) {
-                    var marker = L.marker([flight['Lat'], flight['Lon']], {icon: this.icon}).addTo(this.destinationlayer);
+                for (flight of this.items) {
+                    // var bearing = this.getBearing(this.startLat, this.startLon, flight['Lat'], flight['Lon'])
+                    var bearing = this.getBearing(flight['Lat'], flight['Lon'], this.startLat, this.startLon)
+                    var iconSvg = this.getSvgUrl(bearing)
+                    var icon = L.icon({
+                        iconUrl: iconSvg,
+                        iconSize: [28, 28],
+                        iconAnchor: [14, 14],
+                        rotationAngle: 45
+                    })
+                    var marker = L.marker([flight['Lat'], flight['Lon']], { icon: icon }).addTo(this.destinationlayer);
                     marker.bindPopup(flight['Destination'])
                     L.polyline([[this.startLat, this.startLon], [flight['Lat'], flight['Lon']]], {
                         color: 'red',
-                        weight: 1,
-                        dashArray: "10 20"
+                        weight: 1.5,
+                        dashArray: "10 30"
                     }).addTo(this.destinationlayer)
                 }
             }
+        },
+        getBearing(lat1, lon1, lat2, lon2) {
+            lat1 = this.radians(lat1), lon1 = this.radians(lon1), lat2 = this.radians(lat2), lon2 = this.radians(lon2);
+            var y = Math.sin(lon2 - lon1) * Math.cos(lat2);
+            var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1);
+            var brng = Math.atan2(y, x);
+            var deg = this.degrees(brng)
+            var normalised = (deg + 360) % 360;
+            normalised = Math.round(normalised * 100) / 100;
+            reverse = (normalised + 180) % 360;
+            return reverse;
+        },
+        degrees(rad) {
+            var pi = Math.PI;
+            return rad * (180 / pi);
+        },
+        radians(deg) {
+            var pi = Math.PI;
+            return deg * (pi / 180);
+        },
+        getSvgUrl(rotationAngle) {
+            var svg = this.svgStart + rotationAngle.toString() + this.svgEnd;
+            return 'data:image/svg+xml;base64,' + btoa(svg);
         }
     }
 })
