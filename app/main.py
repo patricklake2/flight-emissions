@@ -35,9 +35,14 @@ def get_aircraft_inf(row, aircraft_df, api_creds):
         factor = constant.AVE_FACTORS[row['Flight Type']]
     else:
         results_json = api_response.json()
-        code = results_json['FlightInfoExResult']['flights'][0]['aircrafttype']
-        log(f'Returned aircraft code {code}\n')
+        try:
+            code = results_json['FlightInfoExResult']['flights'][0]['aircrafttype']
+        except KeyError:
+            log(f'No results from FlightAware for flight {flight_id}')
+            name = '(no match)'
+            factor = constant.AVE_FACTORS[row['Flight Type']]
 
+        log(f'Returned aircraft code {code}\n')
         matches = aircraft_df[aircraft_df['Aircraft_Code'] == code]
         number_matches = len(matches)
 
