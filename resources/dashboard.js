@@ -53,7 +53,6 @@ const NumberBubble = Vue.component('bubble', {
     template: '<div class="bubble"><h2><animated-integer v-bind:value="value"></animated-integer></h2><p v-if="caption">{{ caption }}</p></div>'
 })
 
-
 const Map = Vue.component('v-map', {
     template: '<div class="main-holder"><div v-if="items" id="flight-map"></div></div>',
     data: function () {
@@ -101,7 +100,9 @@ const Map = Vue.component('v-map', {
                         rotationAngle: 45
                     })
                     var marker = L.marker([flight['Lat'], flight['Lon']], { icon: icon }).addTo(this.destinationlayer);
-                    marker.bindPopup(flight['Destination'])
+                    var time = flight['Time'].substring(11,16)
+                    var message = `<ul><li><h3>${flight['Destination']}</h3></li><li><em>Time:</em> ${time}</li><li><em>Airline:</em> ${flight['Airline']}</li><li><em>Distance:</em> ${flight['Distance (km)']} km</li><li><em>Emissions:</em> ${flight['Emissions (kgCO2)']} kgCO2</li></ul>`
+                    marker.bindPopup(message, {'className' : 'popup'})
                     L.polyline([[this.startLat, this.startLon], [flight['Lat'], flight['Lon']]], {
                         color: 'red',
                         weight: 1.5,
@@ -111,11 +112,11 @@ const Map = Vue.component('v-map', {
             }
         },
         getBearing(lat1, lon1, lat2, lon2) {
-            var degrees = function(rad) {
+            var degrees = function (rad) {
                 var pi = Math.PI;
                 return rad * (180 / pi);
             }
-            var radians = function(deg) {
+            var radians = function (deg) {
                 var pi = Math.PI;
                 return deg * (pi / 180);
             }

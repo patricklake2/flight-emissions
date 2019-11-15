@@ -110,6 +110,13 @@ a:visited {
     display: inline-block;
 }
 
+.popup h3 {
+    font-size: 18px;
+}
+.popup em {
+    font-weight: bold;
+}
+
 .fixed_headers {
     width: 90vw;
     table-layout: fixed;
