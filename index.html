@@ -7,17 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FlightCarbon</title>
     <link rel="stylesheet" href="resources/reset.css">
+    <link rel="stylesheet" href="resources/leaflet/leaflet.css">
     <link rel="stylesheet" href="resources/main.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tween.js"></script>
+    <script src="resources/leaflet/leaflet.js"></script>
     <script src="resources/dashboard.js" defer></script>
 </head>
 <body>
     <div id="app">
         <header>
             <img src="resources/odi-logo.png" width="200px">
-            <h1>FlightCarbon</h1>
+            <h1>Leeds' Flight Emissions</h1>
             <ul>
                 <li v-for="page in pages">
                     <a v-bind:href="page.link">{{ page.text }}</a>
@@ -25,11 +27,12 @@
             </ul>
         </header>
         <div class="container">
-            <bubble v-bind:description='"flights today"' v-bind:content='numberFlights'></bubble>
-            <bubble v-bind:description='"km travelled"' v-bind:content='distanceTravelled'></bubble>
-            <bubble v-bind:description='"kg tonnes of CO2 emissions"' v-bind:content='totalEmissions'></bubble>
+            <bubble v-bind:caption='"flights today"' v-bind:value='numberFlights'></bubble>
+            <bubble v-bind:caption='"km travelled"' v-bind:value='distanceTravelled'></bubble>
+            <bubble v-bind:caption='"kg of CO2 emissions"' v-bind:value='totalEmissions'></bubble>
         </div>
-        <vtable v-bind:columns="['Time','Destination','Emissions (kgCO2)']" v-bind:items="flights"></vtable>
+        <!-- <vtable v-bind:columns="['Time','Destination','Emissions (kgCO2)']" v-bind:items="flights"></vtable> -->
+        <v-map v-bind:items="flights"></v-map>
     </div>
 </body>
 
