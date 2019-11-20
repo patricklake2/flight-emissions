@@ -2,7 +2,6 @@ import pandas as pd
 import requests, json, os
 from math import radians, cos, sin, asin, sqrt
 from datetime import date
-from google.cloud import storage
 import constant       #file containing constants
 
 def get_data():
@@ -103,29 +102,17 @@ def get_flight_type(row):
     else:
         return 'LongHaul'
 
-#using my own method to create json from dataframe as I didn't know how to have nested fields using pandas .to_json
 def create_json(df, filename):
-    cols = ['Flight_Number','Time', 'Airline', 'Emissions']
-    dest_cols = ['Airport_Name','IATA','Lat','Lon','Country','Continent','Distance']
-    plane_cols = ['Aircraft_Code', 'Aircraft_Name', 'Emissions_Factor']
     output = {}
     output['Date'] = date.today().strftime('%Y-%m-%d')
     flights = []
     for _,row in df.iterrows():
         flight = {}
-        for col in cols:
+        for col in df.columns.values:
             flight[col] = row[col]
-        location = {}
-        for col in dest_cols:
-            location[col] = row[col]
-        flight['Destination'] = location
-        aircraft = {}
-        for col in plane_cols:
-            aircraft[col] = row[col]
-        flight['Aircraft'] = aircraft
         flights.append(flight)
     output['Flights'] = flights
     with open(filename, 'w+') as fp:
-        json.dump(output, fp, indent=4)
+        json.dump(output, fp, indent=2)
 
 get_data()
