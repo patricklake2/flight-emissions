@@ -5,5 +5,3 @@ __pycache__/
 .gcloudignore
 **/.DS_Store
 app/data/api_auth.json
-app/data/service_account_key.json
-app/gcs.py
