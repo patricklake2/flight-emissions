@@ -1,20 +1,53 @@
-# Retrieve departures data for LBA, find destination airport latitude and longitude, calculate distance, 
-# multiply by emissions factor, return html table
-
-import constant
-import json, requests, os
 import pandas as pd
-from datetime import date
+import requests, json, os
 from math import radians, cos, sin, asin, sqrt
+from datetime import date
+from google.cloud import storage
+import constant       #file containing constants
 
-log_string = ''
+def get_data():
+    response = requests.get(constant.DEPARTURES_URL)
+    today = date.today()
 
-def log(text):
-    global log_string
-    log_string += text
+    if response == False:
+        exit()
 
+    else:
+        departures_json = response.json()
+
+        departures_today = [x for x in departures_json if x['scheduled_time'][0:10] == today.strftime("%Y-%m-%d")]
+        departures = pd.DataFrame(departures_today)
+        departures = departures.loc[:,['flight_ident','scheduled_time', 'airline', 'airport_name','airport_iata']]
+        departures.columns = ['Flight_Number','Time', 'Airline', 'Airport_Name','IATA']
+
+        working_dir = os.path.dirname(os.path.dirname(__file__))
+        airports = pd.read_csv(os.path.join(working_dir, 'app/data/airports.csv'))
+        aircraft = pd.read_csv(os.path.join(working_dir, 'app/data/aircraft.csv'))
+
+        departures = pd.merge(departures, airports, how='left', on='IATA')
+
+        start_lat = (float)(airports.Lat[airports.IATA == 'LBA'])
+        start_lon = (float)(airports.Lon[airports.IATA== 'LBA'])
+        departures['Distance'] = departures.apply(lambda row: get_distance(start_lat, start_lon, row.Lat, row.Lon), axis=1)
+        departures['Flight_Type'] = departures.apply(get_flight_type, axis=1)
+        
+        with open(os.path.join(working_dir, 'app/data/api_auth.json')) as fp:   # 'api_auth.json' is not on github as it contains my flightaware api key.
+            credentials = json.load(fp)
+        departures[['Aircraft_Code', 'Aircraft_Name', 'Emissions_Factor']] = departures.apply(get_aircraft_inf, args=[aircraft, credentials], axis=1, result_type='expand')
+        departures['Emissions'] = departures.apply(lambda row: row.Distance * row.Emissions_Factor, axis=1)
+
+        departures.Lat = departures.apply(lambda row: round(row.Lat, 5), axis=1)
+        departures.Lon = departures.apply(lambda row: round(row.Lon, 5), axis=1)
+        departures.Distance = departures.apply(lambda row: round(row.Distance, 2), axis=1)
+        departures.Emissions = departures.apply(lambda row: round(row.Emissions, 2), axis=1)
+        export_path = os.path.join(working_dir, f'flight-data/{today.strftime("%Y-%m-%d")}.json')
+        create_json(departures, export_path)
+
+#helper functions
+
+#great circle distance calculation
 def get_distance(lat1, lon1, lat2, lon2):
-    R = 6371.000 
+    R = 6371.000        #earth's radius
     lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
     dlat = lat2 - lat1
     dlon = lon2 - lon1
@@ -22,49 +55,41 @@ def get_distance(lat1, lon1, lat2, lon2):
     c = 2 * asin(sqrt(a))
     return R * c
 
+#make a request to FlightAware's API using the flight number, then try to match it to an aircraft in my emission factors table.
 def get_aircraft_inf(row, aircraft_df, api_creds):
-    flight_id = row['Flight ID']
+    flight_id = row.Flight_Number
     request_url = f'{constant.API_ENDPOINT}{flight_id}'
-    log(f'Requesting aircraft info for {flight_id} from {request_url}\n')
     basic_auth_creds = requests.auth.HTTPBasicAuth(api_creds['User'], api_creds['Key'])
     api_response = requests.get(request_url, auth=basic_auth_creds)
 
     if not api_response:
-        log(f'No response from {request_url}, using average emissions factor for flight type\n\n')
         code,name = '',''
-        factor = constant.AVE_FACTORS[row['Flight Type']]
+        factor = constant.AVE_FACTORS[row.Flight_Type] #if there's a problem, just use the average emissions factor for the type of flight
     else:
         results_json = api_response.json()
         try:
             code = results_json['FlightInfoExResult']['flights'][0]['aircrafttype']
-            log(f'Returned aircraft code {code}\n')
-        except KeyError:
+        except KeyError: #if no results 
             code = ''
-            log(f'No results from FlightAware for flight {flight_id}')
-            name = '(no match)'
-            factor = constant.AVE_FACTORS[row['Flight Type']]
+            name = ''
+            factor = constant.AVE_FACTORS[row.Flight_Type]
 
         if not code == '':
             matches = aircraft_df[aircraft_df['Aircraft_Code'] == code]
             number_matches = len(matches)
 
             if number_matches == 0:
-                log(f'No matches in DB for aircraft {code}, using average emissions factor for flight type\n\n')
-                name = '(no match)'
-                factor = constant.AVE_FACTORS[row['Flight Type']]
+                name = ''
+                factor = constant.AVE_FACTORS[row.Flight_Type]
 
             elif number_matches == 1:
                 factor = matches['Emissions_factor'].values[0]
                 name = matches.Plane.values[0]
-                plane_ftype = matches.Type.values[0]
-                log(f'Matched aircraft to {name} (normal usage - {plane_ftype})\n\n')
 
             elif number_matches > 1:
-                newMatches = matches[matches['Type'] == row['Flight Type']]
+                newMatches = matches[matches['Type'] == row.Flight_Type]
                 factor = newMatches['Emissions_factor'].values[0]
                 name = newMatches.Plane.values[0]
-                plane_ftype = newMatches.Type.values[0]
-                log(f'Matched aircraft to {name} (normal usage - {plane_ftype})\n\n')
     
     return code, name, factor
 
@@ -72,68 +97,35 @@ def get_flight_type(row):
     if row.Country == 'United Kingdom':
         return 'Domestic'
 
-    elif row.Continent == 'Europe' or row['Distance (km)'] < 3700:
+    elif row.Continent == 'Europe' or row.Distance < 3700:
         return 'ShortHaul'
 
     else:
         return 'LongHaul'
 
+#using my own method to create json from dataframe as I didn't know how to have nested fields using pandas .to_json
 def create_json(df, filename):
+    cols = ['Flight_Number','Time', 'Airline', 'Emissions']
+    dest_cols = ['Airport_Name','IATA','Lat','Lon','Country','Continent','Distance']
+    plane_cols = ['Aircraft_Code', 'Aircraft_Name', 'Emissions_Factor']
     output = {}
     output['Date'] = date.today().strftime('%Y-%m-%d')
-    items = []
+    flights = []
     for _,row in df.iterrows():
-        item = {}
-        for prop in df.columns.values:
-            item[prop] = row[prop]
-        items.append(item)
-    output['Flights'] = items
+        flight = {}
+        for col in cols:
+            flight[col] = row[col]
+        location = {}
+        for col in dest_cols:
+            location[col] = row[col]
+        flight['Destination'] = location
+        aircraft = {}
+        for col in plane_cols:
+            aircraft[col] = row[col]
+        flight['Aircraft'] = aircraft
+        flights.append(flight)
+    output['Flights'] = flights
     with open(filename, 'w+') as fp:
-        json.dump(output, fp, indent=2)
+        json.dump(output, fp, indent=4)
 
-#main
-log(f'Requesting departures data from {constant.DEPARTURES_URL}\n')
-response = requests.get(constant.DEPARTURES_URL)
-today = date.today()
-
-if response == False:
-    log('No response\n')
-
-else:
-    departures_json = response.json()
-
-    departures_today = [x for x in departures_json if x['scheduled_time'][0:10] == today.strftime("%Y-%m-%d")]
-    departures = pd.DataFrame(departures_today)
-    log(f'Retrieved {len(departures)} flights\n\n')
-    departures = departures.loc[:,['flight_ident','scheduled_time', 'airline', 'airport_name','airport_iata']]
-    departures.columns = ['Flight ID','Time', 'Airline', 'Destination','IATA']
-
-    # working_dir = os.path.join(os.path.dirname(__file__), '..')
-    working_dir = os.path.dirname(os.path.dirname(__file__))
-    airports = pd.read_csv(os.path.join(working_dir, 'app/data/airports.csv'))
-    aircraft = pd.read_csv(os.path.join(working_dir, 'app/data/aircraft.csv'))
-    # airports = pd.read_csv('app/data/airports.csv')
-    # aircraft = pd.read_csv('app/data/aircraft.csv')
-
-    departures = pd.merge(departures, airports, how='left', on='IATA')
-
-    lba_lat = (float)(airports['Lat'][airports['IATA'] == 'LBA'])
-    lba_lon = (float)(airports['Lon'][airports['IATA'] == 'LBA'])
-    departures['Distance (km)'] = departures.apply(lambda row: get_distance(lba_lat, lba_lon, row.Lat, row.Lon), axis=1)
-    departures['Flight Type'] = departures.apply(get_flight_type, axis=1)
-    
-    with open(os.path.join(working_dir, 'app/data/api_auth.json')) as fp:
-        credentials = json.load(fp)
-    departures[['Aircraft Code', 'Aircraft Name', 'Emissions Factor']] = departures.apply(get_aircraft_inf, args=[aircraft, credentials], axis=1, result_type='expand')
-    departures['Emissions (kgCO2)'] = departures.apply(lambda row: row['Distance (km)'] * row['Emissions Factor'], axis=1)
-    log('Finished retrieving aircraft & calculated emissions\n\n')
-
-    departures['Lat'] = departures.apply(lambda row: round(row['Lat'], 5), axis=1)
-    departures['Lon'] = departures.apply(lambda row: round(row['Lon'], 5), axis=1)
-    departures['Distance (km)'] = departures.apply(lambda row: round(row['Distance (km)'], 2), axis=1)
-    departures['Emissions (kgCO2)'] = departures.apply(lambda row: round(row['Emissions (kgCO2)'], 2), axis=1)
-    export_path = os.path.join(working_dir, f'flight-data/{today.strftime("%Y-%m-%d")}.json')
-    print(export_path)
-    create_json(departures, export_path)
-    log('Saved to json file')
-#log_filename = f'{today.strftime("%d-%m-%y")}-log.txt'
+get_data()
