@@ -13,7 +13,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tween.js"></script>
     <script src="resources/leaflet/leaflet.js"></script>
-    <script src="resources/leaflet/rotatemarker.js"></script>
     <script src="resources/dashboard.js" defer></script>
 </head>
 
@@ -35,6 +34,7 @@
             <bubble v-bind:caption='"kg of CO2 emissions"' v-bind:value='totalEmissions'></bubble>
         </div>
         <div class="main-holder">
+            <p v-if="errorMessage" style="color: red">{{ errorMessage }}</p>
             <v-map v-if="view === 'map'" v-bind:items="flights"></v-map>
             <vtable v-if="view === 'table'" v-bind:columns="['Time','Airport_Name','Emissions']" v-bind:items="flights"></vtable>
             <p v-if="view === 'json'">{{ flights }}</p>

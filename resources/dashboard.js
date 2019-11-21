@@ -97,12 +97,11 @@ const Map = Vue.component('v-map', {
                         iconUrl: iconSvg,
                         iconSize: [28, 28],
                         iconAnchor: [14, 14],
-                        rotationAngle: 45
                     })
                     var marker = L.marker([flight['Lat'], flight['Lon']], { icon: icon }).addTo(this.destinationlayer);
-                    var time = flight['Time'].substring(11,16)
+                    var time = flight['Time'].substring(11, 16)
                     var message = `<ul><li><h3>${flight['Airport_Name']}</h3></li><li><em>Time:</em> ${time}</li><li><em>Airline:</em> ${flight['Airline']}</li><li><em>Distance:</em> ${flight['Distance']} km</li><li><em>Emissions:</em> ${flight['Emissions']} kgCO2</li></ul>`
-                    marker.bindPopup(message, {'className' : 'popup'})
+                    marker.bindPopup(message, { 'className': 'popup' })
                     L.polyline([[this.startLat, this.startLon], [flight['Lat'], flight['Lon']]], {
                         color: 'red',
                         weight: 1.5,
@@ -147,31 +146,33 @@ var dashboard = new Vue({
         dataUrl: null,
         flights: [],
         view: 'map',
+        errorMessage: null
     },
     computed: {
-        totalEmissions: function () {
-            var total = 0;
-            for (flight of this.flights) {
-                total += flight['Emissions']
-            }
-            return total
-        },
+        totalEmissions: function () { return sumFlightsProp('Emissions') },
         numberFlights: function () { return this.flights.length; },
-        distanceTravelled: function () {
-            var dist = 0;
+        distanceTravelled: function () { return sumFlightsProp('Distance') }
+    },
+    methods: {
+        sumFlightsProp: function (prop) {
+            var total = 0
             for (flight of this.flights) {
-                dist += flight['Distance']
+                total += flight[prop]
             }
-            return dist;
+            return total;
         }
     },
     mounted() {
-        var isoDate = this.date.toISOString().substring(0, 10)
+        var isoDate = this.date.toISOString().substring(0, 10) // current date in YYYY-MM-DD format
         this.dataUrl = 'https://raw.githubusercontent.com/patricklake2/leeds-flight-emissions/master/flight-data/' + isoDate + '.json'
-        axios.get(this.dataUrl).then(response => {
-            this.date = response.data['Date'];
-            this.flights = response.data['Flights']
-        })
+        axios.get(this.dataUrl)
+            .then(response => {
+                this.date = response.data['Date'];
+                this.flights = response.data['Flights']
+            })
+            .catch(error => {
+                this.errorMessage = "Retrieval of flight data failed. Try refreshing the page."
+            })
     }
 });
 
