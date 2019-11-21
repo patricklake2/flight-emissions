@@ -36,7 +36,7 @@
         </div>
         <div class="main-holder">
             <v-map v-if="view === 'map'" v-bind:items="flights"></v-map>
-            <vtable v-if="view === 'table'" v-bind:columns="['Time','Destination','Emissions (kgCO2)']" v-bind:items="flights"></vtable>
+            <vtable v-if="view === 'table'" v-bind:columns="['Time','Airport_Name','Emissions']" v-bind:items="flights"></vtable>
             <p v-if="view === 'json'">{{ flights }}</p>
         </div>
         <div class="buttons-holder">

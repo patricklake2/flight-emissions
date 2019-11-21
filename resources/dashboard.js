@@ -101,7 +101,7 @@ const Map = Vue.component('v-map', {
                     })
                     var marker = L.marker([flight['Lat'], flight['Lon']], { icon: icon }).addTo(this.destinationlayer);
                     var time = flight['Time'].substring(11,16)
-                    var message = `<ul><li><h3>${flight['Destination']}</h3></li><li><em>Time:</em> ${time}</li><li><em>Airline:</em> ${flight['Airline']}</li><li><em>Distance:</em> ${flight['Distance (km)']} km</li><li><em>Emissions:</em> ${flight['Emissions (kgCO2)']} kgCO2</li></ul>`
+                    var message = `<ul><li><h3>${flight['Airport_Name']}</h3></li><li><em>Time:</em> ${time}</li><li><em>Airline:</em> ${flight['Airline']}</li><li><em>Distance:</em> ${flight['Distance']} km</li><li><em>Emissions:</em> ${flight['Emissions']} kgCO2</li></ul>`
                     marker.bindPopup(message, {'className' : 'popup'})
                     L.polyline([[this.startLat, this.startLon], [flight['Lat'], flight['Lon']]], {
                         color: 'red',
@@ -152,7 +152,7 @@ var dashboard = new Vue({
         totalEmissions: function () {
             var total = 0;
             for (flight of this.flights) {
-                total += flight['Emissions (kgCO2)']
+                total += flight['Emissions']
             }
             return total
         },
@@ -160,14 +160,14 @@ var dashboard = new Vue({
         distanceTravelled: function () {
             var dist = 0;
             for (flight of this.flights) {
-                dist += flight['Distance (km)']
+                dist += flight['Distance']
             }
             return dist;
         }
     },
     mounted() {
         var isoDate = this.date.toISOString().substring(0, 10)
-        this.dataUrl = 'https://raw.githubusercontent.com/patricklake2/leeds-flight-emissions/master/flight-data/' + isoDate + '.json?token=AMSNISPWENM3VZEFWFVAYFK5274WK'
+        this.dataUrl = 'https://raw.githubusercontent.com/patricklake2/leeds-flight-emissions/master/flight-data/' + isoDate + '.json'
         axios.get(this.dataUrl).then(response => {
             this.date = response.data['Date'];
             this.flights = response.data['Flights']
