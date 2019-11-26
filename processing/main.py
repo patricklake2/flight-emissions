@@ -20,8 +20,8 @@ def get_data():
         departures.columns = ['Flight_Number','Time', 'Airline', 'Airport_Name','IATA']
 
         working_dir = os.path.dirname(os.path.dirname(__file__))
-        airports = pd.read_csv(os.path.join(working_dir, 'app/data/airports.csv'))
-        aircraft = pd.read_csv(os.path.join(working_dir, 'app/data/aircraft.csv'))
+        airports = pd.read_csv(os.path.join(working_dir, 'processing/data/airports.csv'))
+        aircraft = pd.read_csv(os.path.join(working_dir, 'processing/data/aircraft.csv'))
 
         departures = pd.merge(departures, airports, how='left', on='IATA')
 
@@ -30,7 +30,7 @@ def get_data():
         departures['Distance'] = departures.apply(lambda row: get_distance(start_lat, start_lon, row.Lat, row.Lon), axis=1)
         departures['Flight_Type'] = departures.apply(get_flight_type, axis=1)
         
-        with open(os.path.join(working_dir, 'app/data/api_auth.json')) as fp:   # 'api_auth.json' is not on github as it contains my flightaware api key.
+        with open(os.path.join(working_dir, 'processing/data/api_auth.json')) as fp:   # 'api_auth.json' is not on github as it contains my flightaware api key.
             credentials = json.load(fp)
         departures[['Aircraft_Code', 'Aircraft_Name', 'Emissions_Factor']] = departures.apply(get_aircraft_inf, args=[aircraft, credentials], axis=1, result_type='expand')
         departures['Emissions'] = departures.apply(lambda row: row.Distance * row.Emissions_Factor, axis=1)
