@@ -4,6 +4,6 @@ __pycache__/
 .vscode/
 .gcloudignore
 **/.DS_Store
-app/data/api_auth.json
-app/data/service_account_key.json
-app/gcs.py
+processing/data/api_auth.json
+processing/data/service_account_key.json
+processing/gcs.py
