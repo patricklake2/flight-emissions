@@ -4,12 +4,19 @@
       <img src="../assets/departures.png" />
       <h2>Departures</h2>
     </div>
-    <v-data-table :headers="headers" :items="items" :items-per-page="10" class="elevation-1">
+    <v-data-table
+      :headers="headers"
+      :items="items"
+      :items-per-page="10"
+      class="elevation-1"
+    >
       <template v-slot:item.Time="{ item }">
         {{ item.Time.substring(11, 16) }}
       </template>
       <template v-slot:item.Emissions="{ item }">
-        <v-chip :color="getColor(item.Emissions)" dark>{{ item.Emissions }}</v-chip>
+        <v-chip :color="getColor(item.Emissions)" dark>{{
+          item.Emissions
+        }}</v-chip>
       </template>
     </v-data-table>
   </div>

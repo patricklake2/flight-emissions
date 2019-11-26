@@ -12,8 +12,8 @@ export default {
       required: true
     },
     duration: {
-        type: Number,
-        default: 500
+      type: Number,
+      default: 500
     }
   },
   data: function() {

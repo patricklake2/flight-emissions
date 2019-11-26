@@ -4,13 +4,18 @@
     <v-content>
       <v-container fluid>
         <div class="container">
-          <p v-if="errorMessage" style="color: red; font-weight:bold;">{{ errorMessage }}</p>
+          <p v-if="errorMessage" style="color: red; font-weight:bold;">
+            {{ errorMessage }}
+          </p>
           <router-view :items="flights" />
         </div>
       </v-container>
     </v-content>
     <v-footer app>
-      <span>&copy; Patrick Lake, <a href="https://odileeds.org">ODI Leeds</a> 2019</span>
+      <span
+        >&copy; Patrick Lake,
+        <a href="https://odileeds.org">ODI Leeds</a> 2019</span
+      >
     </v-footer>
   </v-app>
 </template>

@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import DataTable from "../views/DataTable.vue";
-import LeafletMap from "../views/LeafletMap.vue"
-import Dashboard from "../views/Dashboard.vue"
+import LeafletMap from "../views/LeafletMap.vue";
+import Dashboard from "../views/Dashboard.vue";
 
 Vue.use(VueRouter);
 
@@ -11,23 +11,25 @@ const routes = [
     path: "/",
     name: "Home",
     component: Dashboard,
-    icon: 'mdi-view-dashboard',
+    icon: "mdi-view-dashboard"
   },
   {
     path: "/map",
     name: "Map",
     component: LeafletMap,
-    icon: 'mdi-map'
+    icon: "mdi-map"
   },
   {
     path: "/data",
     name: "Data",
     component: DataTable,
-    icon: 'mdi-table'
+    icon: "mdi-table"
   },
   {
-    path: '/github',
-    beforeEnter() { location.href = 'https://github.com/patricklake2/leeds-flight-emissions' },
+    path: "/github",
+    beforeEnter() {
+      location.href = "https://github.com/patricklake2/leeds-flight-emissions";
+    },
     name: "About / GitHub",
     icon: "mdi-github-circle"
   }

@@ -7,6 +7,17 @@
 <script>
 var L = require("leaflet");
 
+// below code is to fix leaflet icon not showing
+
+// eslint-disable-next-line
+delete L.Icon.Default.prototype._getIconUrl  
+// eslint-disable-next-line
+L.Icon.Default.mergeOptions({  
+  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+  iconUrl: require("leaflet/dist/images/marker-icon.png"),
+  shadowUrl: require("leaflet/dist/images/marker-shadow.png")
+});
+
 export default {
   name: "leaflet-map",
   data: function() {
@@ -20,7 +31,7 @@ export default {
         '<?xml version="1.0" encoding="UTF-8"?><svg version="1.1" id="airport-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15" transform="rotate(',
       svgEnd:
         ')"><path id="path7712-0" d="M15,6.8182L15,8.5l-6.5-1&#xA;&#x9;l-0.3182,4.7727L11,14v1l-3.5-0.6818L4,15v-1l2.8182-1.7273L6.5,7.5L0,8.5V6.8182L6.5,4.5v-3c0,0,0-1.5,1-1.5s1,1.5,1,1.5v2.8182&#xA;&#x9;L15,6.8182z"/></svg>',
-      temp: ''
+      temp: ""
     };
   },
   props: ["items"],

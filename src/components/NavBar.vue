@@ -14,14 +14,14 @@
     </v-navigation-drawer>
     <v-app-bar app clipped-right height="80px">
       <a href="https://odileeds.org">
-      <v-img
-        alt="ODI Logo"
-        class="shrink mr-2"
-        contain
-        src="../assets/logo.svg"
-        transition="scale-transition"
-        width="200px"
-      />
+        <v-img
+          alt="ODI Logo"
+          class="shrink mr-2"
+          contain
+          src="../assets/logo.svg"
+          transition="scale-transition"
+          width="200px"
+        />
       </a>
       <v-toolbar-title class="display-1">{{ title }}</v-toolbar-title>
       <v-spacer />
@@ -32,15 +32,15 @@
 
 <script>
 export default {
-  name: 'navbar',
+  name: "navbar",
   props: {
     items: Array,
     title: String
   },
   data: function() {
     return {
-      drawer: null,
-    }
+      drawer: null
+    };
   }
-}
+};
 </script>

@@ -1,15 +1,32 @@
 <template>
   <div class="dashboard">
     <p>
-      A simple tool which estimates Carbon emissions produced by all flights departing from Leeds Bradford Airport.
+      A simple tool which estimates Carbon emissions produced by all flights
+      departing from Leeds Bradford Airport.
       <br />My methodology and code can be found on GitHub.
     </p>
     <h1>Today</h1>
     <div class="flexbox">
-      <number-bubble :value="numberFlights" caption="flights today" duration=600></number-bubble>
-      <number-bubble :value="uniqueDests" caption="destinations" duration=500></number-bubble>
-      <number-bubble :value="distanceTravelled" caption="km travelled" duration=750></number-bubble>
-      <number-bubble :value="totalEmissions" caption="kg CO2e emissions" duration=1000></number-bubble>
+      <number-bubble
+        :value="numberFlights"
+        caption="flights today"
+        :duration="600"
+      ></number-bubble>
+      <number-bubble
+        :value="uniqueDests"
+        caption="destinations"
+        :duration="500"
+      ></number-bubble>
+      <number-bubble
+        :value="distanceTravelled"
+        caption="km travelled"
+        :duration="750"
+      ></number-bubble>
+      <number-bubble
+        :value="totalEmissions"
+        caption="kg CO2e emissions"
+        :duration="1000"
+      ></number-bubble>
     </div>
   </div>
 </template>
@@ -37,8 +54,8 @@ export default {
     uniqueDests() {
       var destIATAs = [];
       for (var flight of this.items) {
-        if(!destIATAs.includes(flight['IATA'])){
-          destIATAs.push(flight['IATA']);
+        if (!destIATAs.includes(flight["IATA"])) {
+          destIATAs.push(flight["IATA"]);
         }
       }
       return destIATAs.length;
