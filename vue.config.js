@@ -1,4 +1,6 @@
 module.exports = {
   transpileDependencies: ["vuetify"],
-  publicPath: '/leeds-flight-emissions/'
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/leeds-flight-emissions/'
+    : '/'
 };
