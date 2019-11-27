@@ -69,7 +69,7 @@ export default {
 
 <style scoped>
 .container {
-  margin: 10px auto;
+  /* margin: 10px auto; */
   text-align: center;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

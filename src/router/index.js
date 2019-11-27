@@ -33,12 +33,6 @@ const routes = [
     name: "About / GitHub",
     icon: "mdi-github-circle"
   }
-  // {
-  //   path: '/odileeds',
-  //   beforeEnter() { location.href = 'https://odileeds.org' },
-  //   name: "ODI Leeds",
-  //   icon: "mdi-exit-to-app"
-  // }
 ];
 
 const router = new VueRouter({
