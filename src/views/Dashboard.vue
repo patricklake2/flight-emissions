@@ -6,7 +6,7 @@
       <number-bubble :value="distanceTravelled" caption="km travelled" :duration="750"></number-bubble>
       <number-bubble :value="totalEmissions" caption="kg CO2e emissions" :duration="1000"></number-bubble>
     </div>
-    <div class="display-2">Equivalent to...</div>
+    <div class="display-2">That's about the same as...</div>
     <carousel :items="carouselItems"></carousel>
   </div>
 </template>
@@ -31,19 +31,19 @@ export default {
       emissionComparisons: [
         {
           emissionsPerItem: 10000,
-          text: "people's average annual carbon footprint"
+          text: "times an average person's carbon footprint"
         },
         {
           emissionsPerItem: 0.071,
           text: "cups of tea (with milk)"
         },
         {
-          emissionsPerItem: 1.4,
-          text: "miles by bus"
+          emissionsPerItem: 0.021,
+          text: "cups of tea (without milk)"
         },
         {
-          emissionsPerItem: 0.3,
-          text: "copies of the Guardian newspaper"
+          emissionsPerItem: 1.4,
+          text: "miles by bus"
         },
         {
           emissionsPerItem: 0.3,
@@ -59,7 +59,7 @@ export default {
         },
         {
           emissionsPerItem: 2.4,
-          text: "washer machine & tumble dry cycles (at 40C)"
+          text: "washing machine & tumble dry cycles"
         }
       ]
     };
