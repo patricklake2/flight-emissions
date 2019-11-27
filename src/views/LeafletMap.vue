@@ -144,7 +144,7 @@ export default {
         }
         for(let flight of flights) {
             let width = (flight['Emissions'] / max_emissions) * max_width;
-            popup_msg += `<div class="bar" style="width: ${width}px; background-color: ${this.getColor(flight['Emissions'])};">${Math.round(flight['Emissions'])}kg</div><p>${flight['Time'].substring(11, 16)} ${flight['Airline']}</p><br>`
+            popup_msg += `<div class="bar" style="width: ${width}px; background-color: ${this.getColor(flight['Emissions'])};">${Math.round(flight['Emissions']).toLocaleString()}kg</div><p>${flight['Time'].substring(11, 16)} ${flight['Airline']}</p><br>`
         }
         popup_msg += `</div>`
         return popup_msg;

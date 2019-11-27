@@ -18,7 +18,7 @@
       </template>
       <template v-slot:item.Emissions="{ item }">
         <v-chip :color="getColor(item.Emissions)" dark>{{
-          Math.round(item.Emissions)
+          Math.round(item.Emissions).toLocaleString()
         }}</v-chip>
       </template>
     </v-data-table>
