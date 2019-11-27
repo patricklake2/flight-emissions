@@ -6,7 +6,7 @@ __pycache__/
 **/.DS_Store
 processing/data/api_auth.json
 processing/data/service_account_key.json
-src/views/DashboardOld.vue
+old-components/
 
 #vue stuff
 node_modules
