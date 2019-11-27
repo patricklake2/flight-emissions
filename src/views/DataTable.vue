@@ -28,7 +28,7 @@
 <script>
 export default {
   name: "data-table",
-  props: ["items"],
+  props: ["items", "limits"],
   data() {
     return {
       headers: [
@@ -47,8 +47,8 @@ export default {
   },
   methods: {
     getColor(Emissions) {
-      if (Emissions < 5000) return "green";
-      else if (Emissions < 10000) return "orange";
+      if (Emissions < this.limits[0]) return "green";
+      else if (Emissions < this.limits[1]) return "orange";
       else return "red";
     }
   }
