@@ -1,10 +1,26 @@
 <template>
   <div class="dashboard">
     <div class="flexbox">
-      <number-bubble :value="numberFlights" caption="flights today" :duration="600"></number-bubble>
-      <number-bubble :value="uniqueDests" caption="destinations" :duration="500"></number-bubble>
-      <number-bubble :value="distanceTravelled" caption="km travelled" :duration="750"></number-bubble>
-      <number-bubble :value="totalEmissions" caption="kg CO2e emissions" :duration="1000"></number-bubble>
+      <number-bubble
+        :value="numberFlights"
+        caption="flights today"
+        :duration="600"
+      ></number-bubble>
+      <number-bubble
+        :value="uniqueDests"
+        caption="destinations"
+        :duration="500"
+      ></number-bubble>
+      <number-bubble
+        :value="distanceTravelled"
+        caption="km travelled"
+        :duration="750"
+      ></number-bubble>
+      <number-bubble
+        :value="totalEmissions"
+        caption="kg CO2e emissions"
+        :duration="1000"
+      ></number-bubble>
     </div>
     <div class="display-2">That's about the same as...</div>
     <carousel :items="carouselItems"></carousel>
@@ -18,7 +34,8 @@ import Carousel from "../components/Carousel.vue";
 export default {
   name: "dashboard",
   components: {
-    NumberBubble, Carousel
+    NumberBubble,
+    Carousel
   },
   props: {
     items: {
@@ -84,15 +101,15 @@ export default {
       return destIATAs.length;
     },
     carouselItems() {
-        var items = []
-        for(var item of this.emissionComparisons) {
-            var number = Math.round(this.totalEmissions / item.emissionsPerItem);
-            items.push({
-                value: number,
-                caption: item.text
-            });
-        }
-        return items;
+      var items = [];
+      for (var item of this.emissionComparisons) {
+        var number = Math.round(this.totalEmissions / item.emissionsPerItem);
+        items.push({
+          value: number,
+          caption: item.text
+        });
+      }
+      return items;
     }
   },
   methods: {
@@ -121,6 +138,6 @@ h1 {
 }
 
 .display-2 {
-    padding: 15px 0px 15px 15px;
+  padding: 15px 0px 15px 15px;
 }
 </style>

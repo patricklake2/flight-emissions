@@ -4,7 +4,9 @@
     <v-content>
       <v-container fluid>
         <div class="container">
-          <p v-if="errorMessage" style="color: red; font-weight:bold;">{{ errorMessage }}</p>
+          <p v-if="errorMessage" style="color: red; font-weight:bold;">
+            {{ errorMessage }}
+          </p>
           <router-view :items="flights" :limits="quartiles" />
         </div>
       </v-container>
@@ -46,10 +48,12 @@ export default {
       for (let flight of this.flights) {
         data.push(flight["Emissions"]);
       }
-      data.sort(function(a, b){return a-b});
+      data.sort(function(a, b) {
+        return a - b;
+      });
       let q1 = this.percentile(data, 0.33);
       let q2 = this.percentile(data, 0.75);
-      return [q1, q2]
+      return [q1, q2];
     }
   },
   methods: {

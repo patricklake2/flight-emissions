@@ -60,48 +60,50 @@ export default {
   },
   methods: {
     addDests() {
-        var uniqueDests = []
-        for(let flight of this.items) {
-            if(!uniqueDests.includes(flight['Airport_Name'])) {
-                uniqueDests.push(flight['Airport_Name'])
-            }
+      var uniqueDests = [];
+      for (let flight of this.items) {
+        if (!uniqueDests.includes(flight["Airport_Name"])) {
+          uniqueDests.push(flight["Airport_Name"]);
         }
-        var groupedFlights = []
-        for (let airport of uniqueDests) {
-            groupedFlights.push({
-                flights: this.items.filter(fl => fl['Airport_Name'] == airport)
-            })
-        }
-        for (let group of groupedFlights) {
-            var bearing = this.getBearing(
-              group.flights[0]["Lat"],
-              group.flights[0]["Lon"],
-              this.startLat,
-              this.startLon
-            );
-            var iconSvg = this.getSvgUrl(bearing);
-            var icon = L.icon({
-              iconUrl: iconSvg,
-              iconSize: [28, 28],
-              iconAnchor: [14, 14]
-            });
-            var polyLine = L.polyline(
-              [
-                [this.startLat, this.startLon],
-                [group.flights[0]["Lat"], group.flights[0]["Lon"]]
-              ],
-              {
-                color: "red",
-                weight: 1.5,
-                dashArray: "10 30"
-              }
-            );
-            var message = this.createPopupMsg(group.flights)
-            var marker = L.marker([group.flights[0]["Lat"], group.flights[0]["Lon"]], { icon: icon }).addTo(this.destinationlayer);
-            marker.bindPopup(message, { className: "popup" });
-            polyLine.addTo(this.destinationlayer);
-        }
-
+      }
+      var groupedFlights = [];
+      for (let airport of uniqueDests) {
+        groupedFlights.push({
+          flights: this.items.filter(fl => fl["Airport_Name"] == airport)
+        });
+      }
+      for (let group of groupedFlights) {
+        var bearing = this.getBearing(
+          group.flights[0]["Lat"],
+          group.flights[0]["Lon"],
+          this.startLat,
+          this.startLon
+        );
+        var iconSvg = this.getSvgUrl(bearing);
+        var icon = L.icon({
+          iconUrl: iconSvg,
+          iconSize: [28, 28],
+          iconAnchor: [14, 14]
+        });
+        var polyLine = L.polyline(
+          [
+            [this.startLat, this.startLon],
+            [group.flights[0]["Lat"], group.flights[0]["Lon"]]
+          ],
+          {
+            color: "red",
+            weight: 1.5,
+            dashArray: "10 30"
+          }
+        );
+        var message = this.createPopupMsg(group.flights);
+        var marker = L.marker(
+          [group.flights[0]["Lat"], group.flights[0]["Lon"]],
+          { icon: icon }
+        ).addTo(this.destinationlayer);
+        marker.bindPopup(message, { className: "popup" });
+        polyLine.addTo(this.destinationlayer);
+      }
     },
 
     getBearing(lat1, lon1, lat2, lon2) {
@@ -133,21 +135,27 @@ export default {
       return "data:image/svg+xml;base64," + btoa(svg);
     },
     createPopupMsg(flights) {
-        let popup_msg = ``
-        popup_msg += `<div class="box"><h3>${flights[0]['Airport_Name']}</h3>`
-        let max_width = 150;
-        let max_emissions = flights[0]['Emissions']
-        for(let flight of flights) {
-            if (flight['Emissions'] > max_emissions) {
-                max_emissions = flight['Emissions']
-            }
+      let popup_msg = ``;
+      popup_msg += `<div class="box"><h3>${flights[0]["Airport_Name"]}</h3>`;
+      let max_width = 150;
+      let max_emissions = flights[0]["Emissions"];
+      for (let flight of flights) {
+        if (flight["Emissions"] > max_emissions) {
+          max_emissions = flight["Emissions"];
         }
-        for(let flight of flights) {
-            let width = (flight['Emissions'] / max_emissions) * max_width;
-            popup_msg += `<div class="bar" style="width: ${width}px; background-color: ${this.getColor(flight['Emissions'])};">${Math.round(flight['Emissions']).toLocaleString()}kg</div><p>${flight['Time'].substring(11, 16)} ${flight['Airline']}</p><br>`
-        }
-        popup_msg += `</div>`
-        return popup_msg;
+      }
+      for (let flight of flights) {
+        let width = (flight["Emissions"] / max_emissions) * max_width;
+        popup_msg += `<div class="bar" style="width: ${width}px; background-color: ${this.getColor(
+          flight["Emissions"]
+        )};">${Math.round(
+          flight["Emissions"]
+        ).toLocaleString()}kg</div><p>${flight["Time"].substring(11, 16)} ${
+          flight["Airline"]
+        }</p><br>`;
+      }
+      popup_msg += `</div>`;
+      return popup_msg;
     },
     getColor(Emissions) {
       if (Emissions < this.limits[0]) return "green";
@@ -176,14 +184,14 @@ export default {
   display: inline;
 }
 .bar {
-    height: 18px;
-    background-color: red;
-    display: inline-block;
-    margin: 4px 10px -2px 0px;
-    text-align: center;
-    color: white;
+  height: 18px;
+  background-color: red;
+  display: inline-block;
+  margin: 4px 10px -2px 0px;
+  text-align: center;
+  color: white;
 }
 .box {
-    width: 300px;
+  width: 300px;
 }
 </style>
