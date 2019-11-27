@@ -13,9 +13,12 @@
       <template v-slot:item.Time="{ item }">
         {{ item.Time.substring(11, 16) }}
       </template>
+      <template v-slot:item.Distance="{ item }">
+        {{ Math.round(item.Distance) }}
+      </template>
       <template v-slot:item.Emissions="{ item }">
         <v-chip :color="getColor(item.Emissions)" dark>{{
-          item.Emissions
+          Math.round(item.Emissions)
         }}</v-chip>
       </template>
     </v-data-table>
