@@ -10,7 +10,6 @@ In the 'processing' folder, is some code which runs every night and does all of 
 I used Vue to build the website - it has some summary figures, a map showing the flights, and a table view. It's fairly basic at the moment as it's the first website I've built, so feedback would be appreciated.
 
 ## Things I'm working on
-* I'm aware that just saying "100,000kg of CO2" isn't really that meaningful, so I'm going to add a bit of context - for example "this flight to Portugal is equal to 2000 average car journeys".
 * The website doesn't display very well on mobile. I'm working to fix this.
 * Adding a date picker - at the moment you can only see today's data
-* May add more airports in the future - probably Manchester next.
+* Hopefully add more airports in the future - probably Manchester next.
