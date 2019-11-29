@@ -29,7 +29,7 @@ def get_data():
         start_lon = (float)(airports.Lon[airports.IATA== 'LBA'])
         departures['Distance'] = departures.apply(lambda row: get_distance(start_lat, start_lon, row.Lat, row.Lon), axis=1)
         departures['Flight_Type'] = departures.apply(get_flight_type, axis=1)
-        
+        print(departures)
         with open(os.path.join(working_dir, 'processing/data/api_auth.json')) as fp:   # 'api_auth.json' is not on github as it contains my flightaware api key.
             credentials = json.load(fp)
         departures[['Aircraft_Code', 'Aircraft_Name', 'Emissions_Factor']] = departures.apply(get_aircraft_inf, args=[aircraft, credentials], axis=1, result_type='expand')
@@ -60,7 +60,6 @@ def get_aircraft_inf(row, aircraft_df, api_creds):
     request_url = f'{constant.API_ENDPOINT}{flight_id}'
     basic_auth_creds = requests.auth.HTTPBasicAuth(api_creds['User'], api_creds['Key'])
     api_response = requests.get(request_url, auth=basic_auth_creds)
-
     if not api_response:
         code,name = '',''
         factor = constant.AVE_FACTORS[row.Flight_Type] #if there's a problem, just use the average emissions factor for the type of flight
@@ -72,7 +71,7 @@ def get_aircraft_inf(row, aircraft_df, api_creds):
             code = ''
             name = ''
             factor = constant.AVE_FACTORS[row.Flight_Type]
-
+    
         if not code == '':
             matches = aircraft_df[aircraft_df['Aircraft_Code'] == code]
             number_matches = len(matches)

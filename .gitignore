@@ -29,3 +29,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+processing/auth/github.json
+processing/main-new.py
