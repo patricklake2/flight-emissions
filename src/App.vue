@@ -77,10 +77,15 @@ export default {
   },
   mounted() {
     var isoDate = this.date.toISOString().substring(0, 10); // current date in YYYY-MM-DD format
+    // this.dataUrl =
+    //   "https://raw.githubusercontent.com/patricklake2/leeds-flight-emissions/master/flight-data/" +
+    //   isoDate +
+    //   ".json";
     this.dataUrl =
-      "https://raw.githubusercontent.com/patricklake2/leeds-flight-emissions/master/flight-data/" +
+      "https://cdn.jsdelivr.net/gh/patricklake2/leeds-flight-emissions@master/flight-data/" +
       isoDate +
       ".json";
+
     axios
       .get(this.dataUrl)
       .then(response => {
