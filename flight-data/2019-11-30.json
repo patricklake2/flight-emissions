@@ -1,0 +1,56 @@
+{
+  "Date": "2019-11-30",
+  "Flights": [
+    {
+      "Flight_Number": "KL1540",
+      "Time": "2019-11-30 06:10:00",
+      "Airline": "KLM",
+      "Airport_Name": "Amsterdam",
+      "IATA": "AMS",
+      "Lat": 52.3086,
+      "Lon": 4.76389,
+      "Country": "Netherlands",
+      "Continent": "Europe",
+      "Distance": 462.46,
+      "Flight_Type": "ShortHaul",
+      "Aircraft_Code": "E190",
+      "Aircraft_Name": "EMBRAER ERJ190",
+      "Emissions_Factor": 10.2,
+      "Emissions": 4717.13
+    },
+    {
+      "Flight_Number": "FR9079",
+      "Time": "2019-11-30 14:35:00",
+      "Airline": "Ryanair",
+      "Airport_Name": "Alicante",
+      "IATA": "ALC",
+      "Lat": 38.2822,
+      "Lon": -0.55816,
+      "Country": "Spain",
+      "Continent": "Europe",
+      "Distance": 1734.86,
+      "Flight_Type": "ShortHaul",
+      "Aircraft_Code": "B738",
+      "Aircraft_Name": "BOEING 737-800",
+      "Emissions_Factor": 11.5,
+      "Emissions": 19950.88
+    },
+    {
+      "Flight_Number": "FR157",
+      "Time": "2019-11-30 21:15:00",
+      "Airline": "Ryanair",
+      "Airport_Name": "Dublin",
+      "IATA": "DUB",
+      "Lat": 53.4213,
+      "Lon": -6.27007,
+      "Country": "Ireland",
+      "Continent": "Europe",
+      "Distance": 307.78,
+      "Flight_Type": "ShortHaul",
+      "Aircraft_Code": "B738",
+      "Aircraft_Name": "BOEING 737-800",
+      "Emissions_Factor": 11.5,
+      "Emissions": 3539.5
+    }
+  ]
+}
