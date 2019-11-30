@@ -88,12 +88,7 @@ def get_aircraft_inf(row, aircraft_df, api_creds):
     return code, name, factor
 
 #Pass a config object containing properties 'user', 'key', 'email', 'repo'
-def github_commit(data, commit_msg, path, config):
-    user = config['user'],
-    key = config['key'],
-    email = config['email']
-    repo = config['repo']
-
+def github_commit(data, commit_msg, repo, path, user, email, key):
     encoded_bytes = base64.b64encode(data.encode("utf-8"))
     encoded_str = str(encoded_bytes, "utf-8")
     url = f'https://api.github.com/repos/{user}/{repo}/contents/{path}'
@@ -104,7 +99,9 @@ def github_commit(data, commit_msg, path, config):
             "name": user,
             "email": email
         },
-        "content": encoded_str
+        "content": encoded_str,
+        "branch": "dev"
     }
     headers_str = json.dumps(headers)
-    requests.put(url, auth=credentials, data=headers_str)
+    r = requests.put(url, auth=credentials, data=headers_str)
+    print(r.text)
