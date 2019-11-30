@@ -5,8 +5,8 @@ __pycache__/
 .gcloudignore
 **/.DS_Store
 processing/data/api_auth.json
-processing/data/service_account_key.json
 old-components/
+**/private/
 
 #vue stuff
 node_modules
@@ -29,5 +29,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-processing/auth/github.json
-processing/main-new.py
+
