@@ -7,7 +7,6 @@ __pycache__/
 processing/data/api_auth.json
 old-components/
 **/private/
-processing-new/test.py
 
 #vue stuff
 node_modules
