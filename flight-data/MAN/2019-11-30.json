@@ -1,0 +1,87 @@
+{
+  "Date": "2019-11-30",
+  "Airport": {
+    "Name": "Manchester",
+    "IATA": "MAN"
+  },
+  "Flights": [
+    {
+      "FlightNumber": "MH5538",
+      "DateTime": "2019-11-30T20:00:00",
+      "Airline": "",
+      "Destination": "Abu Dhabi",
+      "IATA": "AUH",
+      "Lat": 24.433,
+      "Lon": 54.6511,
+      "Country": "United Arab Emirates",
+      "Continent": "Asia",
+      "Distance": 5678.28,
+      "Flight_Type": "LongHaul"
+    },
+    {
+      "FlightNumber": "SA2337",
+      "DateTime": "2019-11-30T20:00:00",
+      "Airline": "",
+      "Destination": "Abu Dhabi",
+      "IATA": "AUH",
+      "Lat": 24.433,
+      "Lon": 54.6511,
+      "Country": "United Arab Emirates",
+      "Continent": "Asia",
+      "Distance": 5678.28,
+      "Flight_Type": "LongHaul"
+    },
+    {
+      "FlightNumber": "EY022",
+      "DateTime": "2019-11-30T20:00:00",
+      "Airline": "Etihad Airways",
+      "Destination": "Abu Dhabi",
+      "IATA": "AUH",
+      "Lat": 24.433,
+      "Lon": 54.6511,
+      "Country": "United Arab Emirates",
+      "Continent": "Asia",
+      "Distance": 5678.28,
+      "Flight_Type": "LongHaul"
+    },
+    {
+      "FlightNumber": "QR024",
+      "DateTime": "2019-11-30T21:10:00",
+      "Airline": "Qatar Airlines",
+      "Destination": "Doha",
+      "IATA": "DOH",
+      "Lat": 25.27306,
+      "Lon": 51.60806,
+      "Country": "Qatar",
+      "Continent": "Asia",
+      "Distance": 5409.38,
+      "Flight_Type": "LongHaul"
+    },
+    {
+      "FlightNumber": "AA8000",
+      "DateTime": "2019-11-30T21:10:00",
+      "Airline": "American Airlines",
+      "Destination": "Doha",
+      "IATA": "DOH",
+      "Lat": 25.27306,
+      "Lon": 51.60806,
+      "Country": "Qatar",
+      "Continent": "Asia",
+      "Distance": 5409.38,
+      "Flight_Type": "LongHaul"
+    },
+    {
+      "FlightNumber": "FR559",
+      "DateTime": "2019-11-30T22:00:00",
+      "Airline": "Ryanair",
+      "Destination": "Dublin",
+      "IATA": "DUB",
+      "Lat": 53.4213,
+      "Lon": -6.27007,
+      "Country": "Ireland",
+      "Continent": "Europe",
+      "Distance": 265.01,
+      "Flight_Type": "ShortHaul"
+    }
+  ]
+}
