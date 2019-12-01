@@ -82,7 +82,7 @@ export default {
     //   isoDate +
     //   ".json";
     this.dataUrl =
-      "https://cdn.jsdelivr.net/gh/patricklake2/leeds-flight-emissions@dev/flight-data/LBA/" +
+      "https://cdn.jsdelivr.net/gh/patricklake2/leeds-flight-emissions@master/flight-data/LBA/" +
       isoDate +
       ".json";
 
