@@ -62,14 +62,14 @@ export default {
     addDests() {
       var uniqueDests = [];
       for (let flight of this.items) {
-        if (!uniqueDests.includes(flight["Airport_Name"])) {
-          uniqueDests.push(flight["Airport_Name"]);
+        if (!uniqueDests.includes(flight["Destination"])) {
+          uniqueDests.push(flight["Destination"]);
         }
       }
       var groupedFlights = [];
       for (let airport of uniqueDests) {
         groupedFlights.push({
-          flights: this.items.filter(fl => fl["Airport_Name"] == airport)
+          flights: this.items.filter(fl => fl["Destination"] == airport)
         });
       }
       for (let group of groupedFlights) {
@@ -136,7 +136,7 @@ export default {
     },
     createPopupMsg(flights) {
       let popup_msg = ``;
-      popup_msg += `<div class="box"><h3>${flights[0]["Airport_Name"]}</h3>`;
+      popup_msg += `<div class="box"><h3>${flights[0]["Destination"]}</h3>`;
       let max_width = 150;
       let max_emissions = flights[0]["Emissions"];
       for (let flight of flights) {
@@ -150,7 +150,7 @@ export default {
           flight["Emissions"]
         )};">${Math.round(
           flight["Emissions"]
-        ).toLocaleString()}kg</div><p>${flight["Time"].substring(11, 16)} ${
+        ).toLocaleString()}kg</div><p>${flight["DateTime"].substring(11, 16)} ${
           flight["Airline"]
         }</p><br>`;
       }
