@@ -23,7 +23,6 @@ def fillBlankIATA(row, flights_json, json_col_map):
     matches = [item for item in flights_json if item[json_col_map['Destination']] == row['Destination']]
     count = 0
     found = False
-    print(len(matches))
     while count < len(matches) and found == False:
         if not matches[count][json_col_map['IATA']] == '':
             return matches[count][json_col_map['IATA']]
@@ -59,24 +58,22 @@ def get_aircraft_inf(row, aircraft_df, api_creds):
     basic_auth_creds = requests.auth.HTTPBasicAuth(api_creds['User'], api_creds['Key'])
     api_response = requests.get(request_url, auth=basic_auth_creds)
 
+    #default values (if data can't be found)
     code, name = '', ''
-    if not api_response:
-        factor = average_factors[row.Flight_Type] #if there's a problem, just use the average emissions factor for the type of flight
-    else:
+    factor = average_factors[row.Flight_Type]
+
+    if api_response:
         results_json = api_response.json()
         try:
             code = results_json['FlightInfoExResult']['flights'][0]['aircrafttype']
-        except KeyError: #if no results 
-            factor = average_factors[row.Flight_Type]
+        except KeyError: 
+            pass    #if no results we'll keep the default values specified above
     
         if not code == '':
             matches = aircraft_df[aircraft_df['Aircraft_Code'] == code]
             number_matches = len(matches)
 
-            if number_matches == 0:
-                factor = average_factors[row.Flight_Type]
-
-            elif number_matches == 1:
+            if number_matches == 1:
                 factor = matches['Emissions_factor'].values[0]
                 name = matches.Plane.values[0]
 
@@ -84,7 +81,7 @@ def get_aircraft_inf(row, aircraft_df, api_creds):
                 newMatches = matches[matches['Type'] == row.Flight_Type]
                 factor = newMatches['Emissions_factor'].values[0]
                 name = newMatches.Plane.values[0]
-    
+                
     return code, name, factor
 
 #Pass a config object containing properties 'user', 'key', 'email', 'repo'
