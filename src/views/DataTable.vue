@@ -10,8 +10,8 @@
       :items-per-page="10"
       class="elevation-1"
     >
-      <template v-slot:item.Time="{ item }">
-        {{ item.Time.substring(11, 16) }}
+      <template v-slot:item.DateTime="{ item }">
+        {{ item.DateTime.substring(11, 16) }}
       </template>
       <template v-slot:item.Distance="{ item }">
         {{ Math.round(item.Distance) }}
@@ -32,13 +32,13 @@ export default {
   data() {
     return {
       headers: [
-        { text: "Time", value: "Time" },
+        { text: "Time", value: "DateTime" },
         {
           text: "Flight Number",
           sortable: false,
-          value: "Flight_Number"
+          value: "FlightNumber"
         },
-        { text: "Destination", value: "Airport_Name" },
+        { text: "Destination", value: "Destination" },
         { text: "Distance (km)", value: "Distance" },
         { text: "CO2 Emissions (kg)", value: "Emissions" }
       ],

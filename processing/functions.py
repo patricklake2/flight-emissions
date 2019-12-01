@@ -81,7 +81,7 @@ def get_aircraft_inf(row, aircraft_df, api_creds):
                 newMatches = matches[matches['Type'] == row.Flight_Type]
                 factor = newMatches['Emissions_factor'].values[0]
                 name = newMatches.Plane.values[0]
-                
+
     return code, name, factor
 
 #Pass a config object containing properties 'user', 'key', 'email', 'repo'

@@ -82,7 +82,7 @@ export default {
     //   isoDate +
     //   ".json";
     this.dataUrl =
-      "https://cdn.jsdelivr.net/gh/patricklake2/leeds-flight-emissions@master/flight-data/" +
+      "https://cdn.jsdelivr.net/gh/patricklake2/leeds-flight-emissions@dev/flight-data/LBA/" +
       isoDate +
       ".json";
 
@@ -96,9 +96,6 @@ export default {
         this.errorMessage =
           "Retrieval of flight data failed. Try refreshing the page.";
       });
-    if (isoDate == "2019-11-30")
-      this.errorMessage =
-        "Due to a technical problem this is not showing all of today's flights.";
   }
 };
 </script>
