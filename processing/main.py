@@ -9,7 +9,7 @@ with open(os.path.join(working_dir, 'config.json')) as fp:
     config = json.load(fp)
 
 for origin in config['airports']:
-    if origin['IATA'] == 'LBA':
+    if origin['IATA'] == 'LBA':         #only doing leeds bradford for now
         departures = functions.retrieveFlights(origin)
         airports_db = pd.read_csv(os.path.join(working_dir, 'resources/airports.csv'))
         aircraft_db = pd.read_csv(os.path.join(working_dir, 'resources/aircraft.csv'))

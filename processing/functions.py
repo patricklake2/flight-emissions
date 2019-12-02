@@ -97,7 +97,7 @@ def github_commit(data, commit_msg, repo, path, user, email, key):
             "email": email
         },
         "content": encoded_str,
-        "branch": "dev"
+        "branch": "master"
     }
     headers_str = json.dumps(headers)
     r = requests.put(url, auth=credentials, data=headers_str)
