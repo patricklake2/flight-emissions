@@ -9,7 +9,7 @@
         <div class="glory-image"></div>
         <div class="glory-opacity">
           <div class="holder">
-            <a href="/">
+            <a href="https://odileeds.org">
               <img alt="ODI Leeds" src="../assets/odileeds.svg" />
             </a>
           </div>
@@ -19,9 +19,9 @@
         <nav>
           <ul>
             <li v-for="page in pages" :key="page.name">
-              <router-link :to="page.path" exact-active-class="seasonal">{{
-                page.name
-              }}</router-link>
+              <router-link :to="page.path" exact-active-class="seasonal">
+                {{ page.name }}
+              </router-link>
             </li>
           </ul>
         </nav>
