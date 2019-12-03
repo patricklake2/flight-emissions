@@ -3,6 +3,11 @@
     <div class="map-holder">
       <div v-if="items" id="flight-map"></div>
     </div>
+    <p>
+      <strong>Note: </strong>Currently the emissions shown are per flight, not
+      per passenger, so comparisons may not be that useful. I'm working on
+      adding passenger based estimates.
+    </p>
   </div>
 </template>
 
