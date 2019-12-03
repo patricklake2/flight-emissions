@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import About from "../views/About.vue";
 
 Vue.use(VueRouter);
 
@@ -23,11 +24,9 @@ const routes = [
       import(/* webpackChunkName: "Data" */ "../views/DataTable.vue")
   },
   {
-    path: "/github",
-    beforeEnter() {
-      location.href = "https://github.com/patricklake2/leeds-flight-emissions";
-    },
-    name: "About / GitHub"
+    path: "/about",
+    name: "About",
+    component: About
   },
   {
     path: "/odi",
