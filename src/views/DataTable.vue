@@ -3,7 +3,7 @@
     <div class="holder">
       <div id="holder">
         <img src="../assets/departures.png" />
-        <h2>Departures</h2>
+        <h2 id="departures">Departures</h2>
       </div>
       <v-data-table
         :headers="headers"
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style>
-h2 {
+#departures {
   display: inline-block;
   position: relative;
   top: -0.2em;
