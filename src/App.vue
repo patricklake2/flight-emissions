@@ -1,23 +1,36 @@
 <template>
-  <v-app id="inspire">
-    <nav-bar :items="routes" title="Leeds Bradford Flight Emissions" />
-    <v-content>
-      <v-container fluid>
-        <div class="container">
-          <p v-if="errorMessage" style="color: red; font-weight:bold;">
-            {{ errorMessage }}
-          </p>
-          <router-view :items="flights" :limits="quartiles" />
+  <div>
+    <nav-bar :pages="routes"></nav-bar>
+    <div id="main">
+      <div class="seasonal">
+        <div class="holder">
+          <h1>Leeds Bradford Flight Emissions</h1>
         </div>
-      </v-container>
-    </v-content>
-    <v-footer app>
-      <span>
-        &copy; Patrick Lake,
-        <a href="https://odileeds.org">ODI Leeds</a> 2019
-      </span>
-    </v-footer>
-  </v-app>
+      </div>
+      <router-view :items="flights" :limits="quartiles"></router-view>
+    </div>
+    <footer class="b1-bg">
+      <div class="holder">
+        <ul>
+          <li><strong>&copy; Patrick Lake, ODI Leeds 2019</strong></li>
+          <li>
+            Flight Data -
+            <a href="https://www.leedsbradfordairport.co.uk/"
+              >Leeds Bradford Airport</a
+            >
+            &amp; <a href="https://uk.flightaware.com/">FlightAware API</a>
+          </li>
+          <li>
+            Airport Data - <a href="https://openflights.org">OpenFlights</a>
+          </li>
+          <li>
+            Comparisons based on figures from the book "How bad are Bananas?" -
+            &copy; Mike Berners-Lee
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -72,9 +85,6 @@ export default {
       return arr[lower] * (1 - weight) + arr[upper] * weight;
     }
   },
-  created() {
-    this.$vuetify.theme.dark = true;
-  },
   mounted() {
     var isoDate = this.date.toISOString().substring(0, 10); // current date in YYYY-MM-DD format
     // this.dataUrl =
@@ -99,13 +109,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.container {
-  /* margin: 10px auto; */
-  text-align: center;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-</style>

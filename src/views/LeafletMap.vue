@@ -1,10 +1,13 @@
 <template>
-  <div class="main-holder">
-    <div v-if="items" id="flight-map"></div>
+  <div class="holder">
+    <div class="map-holder">
+      <div v-if="items" id="flight-map"></div>
+    </div>
   </div>
 </template>
 
 <script>
+import "leaflet/dist/leaflet.css";
 var L = require("leaflet");
 
 // below code is to fix leaflet icon not showing
@@ -167,9 +170,9 @@ export default {
 </script>
 
 <style>
-.main-holder {
+.map-holder {
   width: 100%;
-  height: 70vh;
+  height: 90vh;
 }
 
 #flight-map {

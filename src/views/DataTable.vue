@@ -1,28 +1,31 @@
 <template>
-  <div id="table-view">
-    <div id="title">
-      <img src="../assets/departures.png" />
-      <h2>Departures</h2>
+  <v-app id="inspire">
+    <div class="holder">
+      <div id="holder">
+        <img src="../assets/departures.png" />
+        <h2>Departures</h2>
+      </div>
+      <v-data-table
+        :headers="headers"
+        :items="items"
+        :items-per-page="10"
+        class="elevation-1"
+        :dark="false"
+      >
+        <template v-slot:item.DateTime="{ item }">
+          {{ item.DateTime.substring(11, 16) }}
+        </template>
+        <template v-slot:item.Distance="{ item }">
+          {{ Math.round(item.Distance) }}
+        </template>
+        <template v-slot:item.Emissions="{ item }">
+          <v-chip :color="getColor(item.Emissions)" dark>{{
+            Math.round(item.Emissions).toLocaleString()
+          }}</v-chip>
+        </template>
+      </v-data-table>
     </div>
-    <v-data-table
-      :headers="headers"
-      :items="items"
-      :items-per-page="10"
-      class="elevation-1"
-    >
-      <template v-slot:item.DateTime="{ item }">
-        {{ item.DateTime.substring(11, 16) }}
-      </template>
-      <template v-slot:item.Distance="{ item }">
-        {{ Math.round(item.Distance) }}
-      </template>
-      <template v-slot:item.Emissions="{ item }">
-        <v-chip :color="getColor(item.Emissions)" dark>{{
-          Math.round(item.Emissions).toLocaleString()
-        }}</v-chip>
-      </template>
-    </v-data-table>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -55,9 +58,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 h2 {
-  color: rgb(255, 253, 84);
   display: inline-block;
   position: relative;
   top: -0.2em;
@@ -68,10 +70,7 @@ img {
   height: 3.5em;
   display: inline-block;
 }
-#title {
-  width: 100%;
-  text-align: left;
-  margin: 0px 0px 20px;
-  height: 3.5em;
+th span {
+  font-size: 1.5em;
 }
 </style>

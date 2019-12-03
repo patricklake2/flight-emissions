@@ -1,0 +1,39 @@
+.slider { padding:0px!important; position: relative; }
+.tns-outer { position: relative; }
+.tns-outer > button { margin: auto; position: absolute; left: 50%; top: 50%; transform: translate3d(-50%,-50%,0); z-index: 10; display: none; }
+.tns-outer:hover > button { display: block; }
+.tns-nav { position: absolute; bottom: 1em; text-align: center; width: 100%; z-index: 10; }
+.tns-nav button { width: 1em; height: 1em; padding: 0px; margin-right: 0.25em; background-color: #bbb; }
+.tns-nav button.tns-nav-active { background-color: #fff; }
+#main ul.grid ul.controls, ul.controls { list-style: none!important; padding: 0px!important; margin: 0px!important; }
+#main ul.grid ul.controls > li, ul.controls > li { width: 1em; height: 1em; margin: 0.25em 0.5em; line-height: 0.8em; text-align: center; font-size: 4em; font-weight: bold; position: absolute; top: 50%; transform: translate3d(0, -75%, 0px); z-index: 10; cursor: pointer; color: black; background-color: white; user-select: none; -moz-user-select: none; }
+#main ul.grid ul.controls > li:hover, ul.controls > li:hover { background-color: #444; color: white; }
+#main ul.grid ul.controls > li:first-child, ul.controls > li:first-child { left: 0px; }
+#main ul.grid ul.controls > li:last-child, ul.controls > li:last-child { right: 0px; }
+.tns-carousel { list-style: none; margin-bottom: 0px!important; }
+.tns-carousel li { min-height: 300px; }
+.tns-carousel li { position: relative; background-position: center center; background-size: cover; background-repeat: no-repeat; }
+.tns-carousel li .label { font-weight: bold; }
+.tns-carousel li img { position: absolute; top: 0px; left: 0px; width: 100%; z-index: 1; }
+.tns-carousel li > div, .my-slider li > div { padding: 4em 8em; }
+ul.my-slider li > div {
+	background-color: rgba(0,0,0,0.2);
+	text-shadow: 0px 0px 10px rgba(0,0,0,0.6);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	color: white;
+	transition: background 0.3s ease-in, text-shadow 0.3s ease-in;
+}
+ul.my-slider li:hover > div {
+	background-color: rgba(0,0,0,0.6);
+	text-shadow: none;
+}
+
+@media only screen and (max-width: 1080px) {
+	#main ul.grid ul.controls, ul.controls { display: none; }
+	.tns-carousel li { min-height: 380px; }
+	.tns-carousel li > div, .my-slider li > div { padding: 2em; }
+}

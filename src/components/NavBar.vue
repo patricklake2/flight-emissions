@@ -1,46 +1,37 @@
 <template>
-  <div id="nav">
-    <v-navigation-drawer v-model="drawer" app clipped right>
-      <v-list dense>
-        <v-list-item v-for="item in items" :key="item.name" :to="item.path">
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.name }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar app clipped-right height="80px">
-      <a href="https://odileeds.org">
-        <v-img
-          alt="ODI Logo"
-          class="shrink mr-2"
-          contain
-          src="../assets/logo.svg"
-          transition="scale-transition"
-          width="200px"
-        />
-      </a>
-      <v-toolbar-title class="display-1">{{ title }}</v-toolbar-title>
-      <v-spacer />
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-    </v-app-bar>
+  <div>
+    <input type="checkbox" id="hamburger" class="hamburger" />
+    <label for="hamburger" class="hamburger">
+      <span class="nv">Toggle menu (if not visible)</span>
+    </label>
+    <header class="b1-bg">
+      <div class="glory b1-bg">
+        <div class="glory-image"></div>
+        <div class="glory-opacity">
+          <div class="holder">
+            <a href="/">
+              <img alt="ODI Leeds" src="../assets/odileeds.svg" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="holder">
+        <nav>
+          <ul>
+            <li v-for="page in pages" :key="page.name">
+              <router-link :to="page.path" exact-active-class="seasonal">{{
+                page.name
+              }}</router-link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
   </div>
 </template>
 
 <script>
 export default {
-  name: "navbar",
-  props: {
-    items: Array,
-    title: String
-  },
-  data: function() {
-    return {
-      drawer: null
-    };
-  }
+  props: ["pages"]
 };
 </script>
