@@ -5,8 +5,10 @@
       has on the environment, since international flights are not included in
       local or national carbon budgets (even though they account for roughly 95%
       of total aviation emissions). It's fairly simple; it just takes all the
-      daily departures from Leeds Bradford, and shows you how much CO2 emissions
-      each flight produces, along with a daily total.
+      daily departures from Leeds Bradford, and shows you how much CO<sub
+        >2</sub
+      >
+      emissions each flight produces, along with a daily total.
     </p>
     <ul class="grid">
       <li class="threecol">
@@ -17,7 +19,7 @@
               :duration="1000"
             ></animated-number>
           </h1>
-          <p>KG of CO2 Emissions from today's departures</p>
+          <p>kg of CO<sub>2</sub> Emissions from today's departures</p>
         </a>
       </li>
       <li>
@@ -50,7 +52,7 @@
               :duration="1000"
             ></animated-number>
           </h1>
-          <p>KM travelled</p>
+          <p>km travelled</p>
         </a>
       </li>
     </ul>
