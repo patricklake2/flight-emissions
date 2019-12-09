@@ -51,7 +51,7 @@ export default {
           vm.duration
         )
         .onUpdate(function(object) {
-          vm.tweeningValue = object.tweeningValue.toFixed(0);
+          vm.tweeningValue = Math.round(object.tweeningValue).toLocaleString();
         })
         .start();
       animate();
