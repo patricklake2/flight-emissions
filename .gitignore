@@ -4,9 +4,8 @@ __pycache__/
 .vscode/
 .gcloudignore
 **/.DS_Store
-processing/data/api_auth.json
-old-components/
 **/private/
+fa_auth.json
 
 #vue stuff
 node_modules
