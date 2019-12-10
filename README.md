@@ -4,12 +4,11 @@ We built this tool to demonstrate the impact flights have on the environment, si
 ## How to Contribute
 If you'd like to take responsibility for a specific airport, you'll need to:
 * Retrieve daily departures data and calculate emissions estimates for each flight. The code that we wrote for Leeds Bradford Airport [is available on GitHub](https://github.com/patricklake2/leeds-flights-data/tree/master/processing), with some resources you may need (airport & aircraft data). You could adapt this, or write your own.
-* Save the output as a json file. The filename should be the date in ISO format (YYYY-MM-DD.json)
-* Create an index file which describes your dataset (format to be defined)
+* Save the output as a json file (format to be defined). The filename should be the date in ISO format (YYYY-MM-DD.json)
 
 We'd suggest putting these in a folder on a github repo - have a look at our [example for Leeds Bradford Airport](https://github.com/patricklake2/leeds-flights-data/tree/master/data)
 
-You'll then need to add the airport name and the link to your data folder in the index.json file in this repo. You can do this yourself and open a pull request, or [open an issue](https://github.com/patricklake2/flight-emissions-viewer/issues/new) and we'll add it for you.
+You'll then need to add the airport name and the url of the folder where the data is located to the index.json file. You can do this yourself and open a pull request, or [open an issue](https://github.com/patricklake2/flight-emissions-viewer/issues/new) and I'll add it for you.
 
 ## Website
 The website is build using Vue. It's currently fairly basic, but you're welcome to make improvements and open a pull request.
