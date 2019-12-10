@@ -22,8 +22,12 @@ for origin in config['airports']:
         departures['Flight_Type'] = departures.apply(functions.get_flight_type, axis=1)
 
         #The file referenced below is NOT open as it contains my API key. You can get one from FlightAware.
-        with open(os.path.join(working_dir, 'private/flightaware.json')) as fp:
-            credentials = json.load(fp)
+        try:
+            with open(os.path.join(working_dir, 'fa_auth.json')) as fp:
+                credentials = json.load(fp)
+        except FileNotFoundError:
+            credentials = None
+
         departures[['Aircraft_Code', 'Aircraft_Name', 'Emissions_Factor']] = departures.apply(functions.get_aircraft_inf, args=[aircraft_db, credentials], axis=1, result_type='expand')
         departures['Emissions'] = departures.apply(lambda row: row.Distance * row.Emissions_Factor, axis=1)
 
@@ -37,22 +41,17 @@ for origin in config['airports']:
         iata = origin['IATA']
         name = origin['Name']
         date = date.today().strftime("%Y-%m-%d")
-        output_json = {
+        output = {
             "Date": date,
             "Airport": {
                 "Name": name,
                 "IATA": iata
             }
         }
-        output_json['Flights'] = departures.to_dict(orient='records')
-        output = json.dumps(output_json, indent=2)
+        output['Flights'] = departures.to_dict(orient='records')
         
-        #again, the below file isn't public as it contains my github authentication token.
-        with open(os.path.join(working_dir, 'private/github.json')) as fp:
-            github = json.load(fp)
-
-        path = f'flight-data/{iata}/{date}.json'
-        functions.github_commit(output, 'Added flight data', 'leeds-flight-emissions', path, github['user'], github['email'], github['key'])
-
+        path = os.path.join(working_dir, "..", "flight-data", iata, f'{date}test.json')
+        with open(path, 'w+') as fp:
+            json.dump(output, fp, indent=2)
 
 
