@@ -9,6 +9,20 @@ In the 'processing' folder, is some code which runs every night and does all of 
 ## Website
 I used Vue to build the website - it has some summary figures, a map showing the flights, and a table view. It's fairly basic at the moment as it's the first website I've built, so feedback would be appreciated.
 
+## How to use
+1. Open your terminal, cd into the 'processing' folder, and then (assuming you have Python3.7 installed), run "python3 -m venv venv".
+2. Run "source venv/bin/activate" then "pip3 install -r requirements.txt". This creates a virtual environment and installs the requirements to run the scripts.
+3. If you have a FlightAware account, create a file in the processing folder called fa_auth.json. This should be in the format
+```json
+{
+    "User" : "(your username)",
+    "Key" : "(your api key)"
+}
+```
+* FlightAware is only used for determining the aircraft model for each flight.
+If you don't have an account, the script will still run, but the calculations will be considerably less accurate as they'll be based on average emission factors rather than aircraft-specific figures.
+4. Run "python3 main.py", and you should see the output in the flight-data folder.
+
 ## Things I'm working on
 * The website doesn't display very well on mobile. I'm working to fix this.
 * Adding a date picker - at the moment you can only see today's data
