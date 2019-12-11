@@ -1,5 +1,4 @@
 {
-    "dataFolder": "https://github.com/patricklake2/leeds-flights-data/tree/master/data/",
-    "lastUpdate": "2019-12-10",
-    "active": true
+    "dataFolder": "https://github.com/patricklake2/flight-emissions/blob/master/leeds-bradford/data/",
+    "lastUpdate": "2019-12-11",
 }
