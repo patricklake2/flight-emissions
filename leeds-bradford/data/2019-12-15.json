@@ -6,23 +6,6 @@
   },
   "Flights": [
     {
-      "FlightNumber": "LS195",
-      "DateTime": "2019-12-15 14:45:00",
-      "Airline": "Jet2.com",
-      "Destination": "Prague",
-      "IATA": "PRG",
-      "Lat": 50.1008,
-      "Lon": 14.26,
-      "Country": "Czech Republic",
-      "Continent": "Europe",
-      "Distance": 1164.8,
-      "Flight_Type": "ShortHaul",
-      "Aircraft_Code": "B738",
-      "Aircraft_Name": "BOEING 737-800",
-      "Emissions_Factor": 11.5,
-      "Emissions": 13395.2
-    },
-    {
       "FlightNumber": "EI3397",
       "DateTime": "2019-12-15 15:20:00",
       "Airline": "Aer Lingus",
