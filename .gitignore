@@ -4,7 +4,6 @@ __pycache__/
 .vscode/
 .gcloudignore
 **/.DS_Store
-**/private/
 fa_auth.json
 
 #vue stuff
