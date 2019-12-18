@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div v-if="!correctURL" class="c12-bg" style="text-align: center;">
+      <div class="holder">
+        Note: This website has moved to the
+        <a
+          href="https://odileeds.org/projects/flight-emissions"
+          style="color: blue;"
+          >ODI Leeds website</a
+        >
+      </div>
+    </div>
+
     <nav-bar :pages="routes"></nav-bar>
     <div id="main">
       <div class="seasonal">
@@ -12,16 +23,20 @@
     <footer class="b1-bg">
       <div class="holder">
         <ul>
-          <li><strong>&copy; Patrick Lake, ODI Leeds 2019</strong></li>
+          <li>
+            <strong>&copy; Patrick Lake, ODI Leeds 2019</strong>
+          </li>
           <li>
             Flight Data -
             <a href="https://www.leedsbradfordairport.co.uk/"
               >Leeds Bradford Airport</a
             >
-            &amp; <a href="https://uk.flightaware.com/">FlightAware API</a>
+            &amp;
+            <a href="https://uk.flightaware.com/">FlightAware API</a>
           </li>
           <li>
-            Airport Data - <a href="https://openflights.org">OpenFlights</a>
+            Airport Data -
+            <a href="https://openflights.org">OpenFlights</a>
           </li>
           <li>
             Comparisons based on figures from the book "How bad are Bananas?" -
@@ -67,6 +82,11 @@ export default {
       let q1 = this.percentile(data, 0.33);
       let q2 = this.percentile(data, 0.75);
       return [q1, q2];
+    },
+    correctURL() {
+      let host = window.location.hostname;
+      if (host != "odileeds.org") return false;
+      else return true;
     }
   },
   methods: {
