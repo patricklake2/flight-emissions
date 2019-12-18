@@ -170,7 +170,7 @@ export default {
 <style scoped>
 h1 {
   font-size: 500%;
-  margin-top: 30px;
+  margin-top: 30px !important;
 }
 li p {
   margin-top: 50px;
