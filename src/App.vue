@@ -10,7 +10,6 @@
         >
       </div>
     </div>
-
     <nav-bar :pages="routes"></nav-bar>
     <div id="main">
       <div class="seasonal">
@@ -18,6 +17,7 @@
           <h1>Leeds Bradford Flight Emissions</h1>
         </div>
       </div>
+      <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
       <router-view :items="flights" :limits="quartiles"></router-view>
     </div>
     <footer class="b1-bg">
@@ -62,9 +62,10 @@ export default {
   data() {
     return {
       date: new Date(),
-      dataUrl: null,
       flights: [],
-      errorMessage: null
+      errorMessage: null,
+      rootIndex: [],
+      meta: {}
     };
   },
   computed: {
@@ -103,29 +104,27 @@ export default {
 
       if (upper >= arr.length) return arr[lower];
       return arr[lower] * (1 - weight) + arr[upper] * weight;
+    },
+    setAirport(pos) {
+      axios
+        .get(this.rootIndex[pos].index)
+        .then(response => {
+          this.meta = response.data;
+          let flightDataURL = `${this.meta.dataURL}${this.meta.lastUpdate}.json`;
+          return axios.get(flightDataURL);
+        })
+        .then(response => {
+          this.flights = response.data.Flights;
+        });
     }
   },
   mounted() {
-    var isoDate = this.date.toISOString().substring(0, 10); // current date in YYYY-MM-DD format
-    // this.dataUrl =
-    //   "https://raw.githubusercontent.com/patricklake2/leeds-flight-emissions/master/flight-data/" +
-    //   isoDate +
-    //   ".json";
-    this.dataUrl =
-      "https://cdn.jsdelivr.net/gh/patricklake2/flight-emissions@master/leeds-bradford/data/" +
-      isoDate +
-      ".json";
-
-    axios
-      .get(this.dataUrl)
-      .then(response => {
-        this.date = response.data["Date"];
-        this.flights = response.data["Flights"];
-      })
-      .catch(() => {
-        this.errorMessage =
-          "Retrieval of flight data failed. Try refreshing the page.";
-      });
+    let indexURL =
+      "https://raw.githubusercontent.com/odileeds/flight-data/master/data/index.json";
+    axios.get(indexURL).then(response => {
+      this.rootIndex = response.data;
+      this.setAirport(0);
+    });
   }
 };
 </script>
