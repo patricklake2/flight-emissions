@@ -48,8 +48,14 @@ output = {
 }
 output['Flights'] = departures.to_dict(orient='records')
 
-path = os.path.join(os.path.dirname(working_dir), f'data/{date}.json')
+path = os.path.join(os.path.dirname(working_dir), f'data/{date}-test.json')
 with open(path, 'w+') as fp:
     json.dump(output, fp, indent=2)
 
+indexPath = os.path.join(os.path.dirname(working_dir), f'data/index.json')
+with open(indexPath, "r") as fp:
+    index = json.load(fp)
+index['lastUpdate'] = date
+with open(indexPath, "w") as fp:
+    json.dump(index, fp, indent=2)
 
