@@ -17,6 +17,11 @@
           <h1>Leeds Bradford Flight Emissions</h1>
         </div>
       </div>
+      <div class="holder no-margin">
+        <div id="select-box">
+          <v-select label="name" :options="rootIndex"></v-select>
+        </div>
+      </div>
       <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
       <router-view :items="flights" :limits="quartiles"></router-view>
     </div>
@@ -50,11 +55,14 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 const axios = require("axios").default;
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    "v-select": vSelect
   },
   props: {
     source: String
@@ -128,3 +136,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+#select-box {
+  width: 300px;
+}
+</style>
