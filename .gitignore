@@ -5,6 +5,7 @@ __pycache__/
 .gcloudignore
 **/.DS_Store
 fa_auth.json
+__init__.py
 
 #vue stuff
 node_modules
