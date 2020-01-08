@@ -1,94 +1,56 @@
 {
-  "Date": "2019-12-08",
-  "Airport": {
-    "Name": "Leeds Bradford",
-    "IATA": "LBA"
-  },
-  "Flights": [
-    {
-      "FlightNumber": "EI3397",
-      "DateTime": "2019-12-08 15:20:00",
-      "Airline": "Aer Lingus",
-      "Destination": "Dublin",
-      "IATA": "DUB",
-      "Lat": 53.4213,
-      "Lon": -6.27007,
-      "Country": "Ireland",
-      "Continent": "Europe",
-      "Distance": 307.78,
-      "Flight_Type": "ShortHaul",
-      "Aircraft_Code": "",
-      "Aircraft_Name": "",
-      "Emissions_Factor": 11.8,
-      "Emissions": 3631.84
-    },
-    {
-      "FlightNumber": "LS205",
-      "DateTime": "2019-12-08 18:00:00",
-      "Airline": "Jet2.com",
-      "Destination": "Amsterdam",
-      "IATA": "AMS",
-      "Lat": 52.3086,
-      "Lon": 4.76389,
-      "Country": "Netherlands",
-      "Continent": "Europe",
-      "Distance": 462.46,
-      "Flight_Type": "ShortHaul",
-      "Aircraft_Code": "B733",
-      "Aircraft_Name": "BOEING 737-300",
-      "Emissions_Factor": 11.6,
-      "Emissions": 5364.58
-    },
-    {
-      "FlightNumber": "EI3395",
-      "DateTime": "2019-12-08 19:00:00",
-      "Airline": "Aer Lingus",
-      "Destination": "Dublin",
-      "IATA": "DUB",
-      "Lat": 53.4213,
-      "Lon": -6.27007,
-      "Country": "Ireland",
-      "Continent": "Europe",
-      "Distance": 307.78,
-      "Flight_Type": "ShortHaul",
-      "Aircraft_Code": "",
-      "Aircraft_Name": "",
-      "Emissions_Factor": 11.8,
-      "Emissions": 3631.84
-    },
-    {
-      "FlightNumber": "FR157",
-      "DateTime": "2019-12-08 19:25:00",
-      "Airline": "Ryanair",
-      "Destination": "Dublin",
-      "IATA": "DUB",
-      "Lat": 53.4213,
-      "Lon": -6.27007,
-      "Country": "Ireland",
-      "Continent": "Europe",
-      "Distance": 307.78,
-      "Flight_Type": "ShortHaul",
-      "Aircraft_Code": "B738",
-      "Aircraft_Name": "BOEING 737-800",
-      "Emissions_Factor": 11.5,
-      "Emissions": 3539.5
-    },
-    {
-      "FlightNumber": "BE740",
-      "DateTime": "2019-12-08 20:00:00",
-      "Airline": "flybe",
-      "Destination": "Belfast City",
-      "IATA": "BHD",
-      "Lat": 54.6181,
-      "Lon": -5.8725,
-      "Country": "United Kingdom",
-      "Continent": "Europe",
-      "Distance": 286.13,
-      "Flight_Type": "Domestic",
-      "Aircraft_Code": "DH8D",
-      "Aircraft_Name": "BOMBARDIER DASH 8 Q400",
-      "Emissions_Factor": 7.1,
-      "Emissions": 2031.51
-    }
-  ]
+	"from": {
+		"n": "Leeds Bradford",
+		"IATA": "LBA",
+		"geo": [-1.66057,53.86589],
+		"cc": "GB",
+		"continent": "EU"
+	},
+	"flights": [
+		{
+			"id": "EI3397",
+			"time": "2019-12-08T15:20:00Z",
+			"airline": "Aer Lingus",
+			"aircraft": {"code": "", "name": ""},
+			"to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": null, "continent": null},
+			"km": 307.78,
+			"emissions": {"f": 11.8, "kg": 3631.84}
+		},
+		{
+			"id": "LS205",
+			"time": "2019-12-08T18:00:00Z",
+			"airline": "Jet2.com",
+			"aircraft": {"code": "B733", "name": "BOEING 737-300"},
+			"to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": null, "continent": null},
+			"km": 462.46,
+			"emissions": {"f": 11.6, "kg": 5364.58}
+		},
+		{
+			"id": "EI3395",
+			"time": "2019-12-08T19:00:00Z",
+			"airline": "Aer Lingus",
+			"aircraft": {"code": "", "name": ""},
+			"to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": null, "continent": null},
+			"km": 307.78,
+			"emissions": {"f": 11.8, "kg": 3631.84}
+		},
+		{
+			"id": "FR157",
+			"time": "2019-12-08T19:25:00Z",
+			"airline": "Ryanair",
+			"aircraft": {"code": "B738", "name": "BOEING 737-800"},
+			"to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": null, "continent": null},
+			"km": 307.78,
+			"emissions": {"f": 11.5, "kg": 3539.5}
+		},
+		{
+			"id": "BE740",
+			"time": "2019-12-08T20:00:00Z",
+			"airline": "flybe",
+			"aircraft": {"code": "DH8D", "name": "BOMBARDIER DASH 8 Q400"},
+			"to": {"n": "Belfast City", "IATA": "BHD", "geo": [-5.8725,54.6181], "cc": null, "continent": null},
+			"km": 286.13,
+			"emissions": {"f": 7.1, "kg": 2031.51}
+		}
+	]
 }
