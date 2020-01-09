@@ -125,19 +125,27 @@ export default {
   },
   computed: {
     totalEmissions() {
-      return this.sumFlightsProp("Emissions");
+      if (this.items.length != 0) {
+        let arr = this.items.map(fl => fl["emissions"]["kg"]);
+        const sum = (acc, current) => acc + current;
+        return arr.reduce(sum);
+      } else return 0;
     },
     numberFlights() {
       return this.items.length;
     },
     distanceTravelled() {
-      return this.sumFlightsProp("Distance");
+      if (this.items.length != 0) {
+        let arr = this.items.map(fl => fl["km"]);
+        const sum = (acc, current) => acc + current;
+        return arr.reduce(sum);
+      } else return 0;
     },
     uniqueDests() {
       var destIATAs = [];
       for (var flight of this.items) {
-        if (!destIATAs.includes(flight["IATA"])) {
-          destIATAs.push(flight["IATA"]);
+        if (!destIATAs.includes(flight["to"]["IATA"])) {
+          destIATAs.push(flight["to"]["IATA"]);
         }
       }
       return destIATAs.length;

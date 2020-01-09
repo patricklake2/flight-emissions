@@ -12,15 +12,18 @@
         class="elevation-1"
         :dark="false"
       >
-        <template v-slot:item.DateTime="{ item }">
-          {{ item.DateTime.substring(11, 16) }}
+        <template v-slot:item.time="{ item }">
+          {{ item.time.substring(11, 16) }}
         </template>
-        <template v-slot:item.Distance="{ item }">
-          {{ Math.round(item.Distance) }}
+        <template v-slot:item.to.n="{ item }">
+          {{ item.to.n }}
         </template>
-        <template v-slot:item.Emissions="{ item }">
-          <v-chip :color="getColor(item.Emissions)" dark>{{
-            Math.round(item.Emissions).toLocaleString()
+        <template v-slot:item.km="{ item }">
+          {{ Math.round(item.km) }}
+        </template>
+        <template v-slot:item.emissions.kg="{ item }">
+          <v-chip :color="getColor(item.emissions.kg)" dark>{{
+            Math.round(item.emissions.kg).toLocaleString()
           }}</v-chip>
         </template>
       </v-data-table>
@@ -35,15 +38,15 @@ export default {
   data() {
     return {
       headers: [
-        { text: "Time", value: "DateTime" },
+        { text: "Time", value: "time" },
         {
           text: "Flight Number",
           sortable: false,
-          value: "FlightNumber"
+          value: "id"
         },
-        { text: "Destination", value: "Destination" },
-        { text: "Distance (km)", value: "Distance" },
-        { text: "CO2 Emissions (kg)", value: "Emissions" }
+        { text: "Destination", value: "to.n" },
+        { text: "Distance (km)", value: "km" },
+        { text: "CO2 Emissions (kg)", value: "emissions.kg" }
       ],
       boundaries: []
     };
