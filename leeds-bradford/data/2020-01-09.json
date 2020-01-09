@@ -240,6 +240,5 @@
       "to": {"n": "Belfast City", "IATA": "BHD", "geo": [-5.8725,54.6181], "cc": null, "continent": null},
       "km": 286.13,
       "emissions": {"f": 7.1, "kg": 2031.51}
-    }
-  ]
+    }]
 }
