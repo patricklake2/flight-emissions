@@ -128,7 +128,7 @@ export default {
       "https://raw.githubusercontent.com/odileeds/flight-data/master/index.json";
     axios.get(indexURL).then(response => {
       this.rootIndex = response.data;
-      this.setAirport("LBA-testing");
+      this.setAirport("LBA");
     });
   }
 };
