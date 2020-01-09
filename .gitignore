@@ -6,6 +6,7 @@ __pycache__/
 **/.DS_Store
 fa_auth.json
 __init__.py
+temp/
 
 #vue stuff
 node_modules
