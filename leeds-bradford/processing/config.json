@@ -1,12 +1,14 @@
 {
     "IATA": "LBA",
-    "Name": "Leeds Bradford",
+    "n": "Leeds Bradford",
+    "cc": "GB",
+    "continent": "EU",
     "url": "https://lba-flights.production.parallax.dev/departures",
-    "column_map": {
-        "FlightNumber": "flight_ident",
-        "DateTime": "scheduled_time",
-        "Airline": "airline",
-        "Destination": "airport_name",
+    "flights_column_map": {
+        "id": "flight_ident",
+        "time": "scheduled_time",
+        "airline": "airline",
+        "n": "airport_name",
         "IATA": "airport_iata"
     }
 }

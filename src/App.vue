@@ -2,12 +2,13 @@
   <div>
     <div v-if="!correctURL" class="c12-bg" style="text-align: center;">
       <div class="holder">
-        Note: This website has moved to the
+        Note: You can now access this page through the
         <a
           href="https://odileeds.org/projects/flight-emissions"
           style="color: blue;"
           >ODI Leeds website</a
         >
+        - more projects coming soon!
       </div>
     </div>
     <nav-bar :pages="routes"></nav-bar>
@@ -17,13 +18,12 @@
           <h1>Leeds Bradford Flight Emissions</h1>
         </div>
       </div>
-      <div class="holder no-margin">
-        <div id="select-box">
-          <v-select label="name" :options="rootIndex"></v-select>
-        </div>
-      </div>
       <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
-      <router-view :items="flights" :limits="quartiles"></router-view>
+      <router-view
+        :items="flights"
+        :meta="meta"
+        :limits="quartiles"
+      ></router-view>
     </div>
     <footer class="b1-bg">
       <div class="holder">
@@ -55,14 +55,11 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
-import vSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
 const axios = require("axios").default;
 
 export default {
   components: {
-    NavBar,
-    "v-select": vSelect
+    NavBar
   },
   props: {
     source: String
@@ -72,7 +69,7 @@ export default {
       date: new Date(),
       flights: [],
       errorMessage: null,
-      rootIndex: [],
+      rootIndex: {},
       meta: {}
     };
   },
@@ -83,7 +80,7 @@ export default {
     quartiles() {
       var data = [];
       for (let flight of this.flights) {
-        data.push(flight["Emissions"]);
+        data.push(flight["emissions"]["kg"]);
       }
       data.sort(function(a, b) {
         return a - b;
@@ -113,32 +110,26 @@ export default {
       if (upper >= arr.length) return arr[lower];
       return arr[lower] * (1 - weight) + arr[upper] * weight;
     },
-    setAirport(pos) {
+    setAirport(iata) {
       axios
-        .get(this.rootIndex[pos].index)
+        .get(this.rootIndex[iata]["index"])
         .then(response => {
           this.meta = response.data;
-          let flightDataURL = `${this.meta.dataURL}${this.meta.lastUpdate}.json`;
+          let flightDataURL = `${this.meta.directory}${this.meta.lastupdate}.json`;
           return axios.get(flightDataURL);
         })
         .then(response => {
-          this.flights = response.data.Flights;
+          this.flights = response.data.flights;
         });
     }
   },
   mounted() {
     let indexURL =
-      "https://raw.githubusercontent.com/odileeds/flight-data/master/data/index.json";
+      "https://raw.githubusercontent.com/odileeds/flight-data/master/index.json";
     axios.get(indexURL).then(response => {
       this.rootIndex = response.data;
-      this.setAirport(0);
+      this.setAirport("LBA-testing");
     });
   }
 };
 </script>
-
-<style scoped>
-#select-box {
-  width: 300px;
-}
-</style>
