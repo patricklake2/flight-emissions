@@ -12,7 +12,6 @@ def retrieveFlights(airport):
         date_field = airport['flights_column_map']['time']
         today = date.today().strftime("%Y-%m-%d")
         today_data = [item for item in json_data if item[date_field][0:10] == today]
-        today_data = today_data[0:3]
         df = pd.DataFrame(today_data)
 
         for key, val in airport['flights_column_map'].items():
