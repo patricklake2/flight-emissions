@@ -1,0 +1,38 @@
+{
+  "from": {
+    "n": "Leeds Bradford",
+    "IATA": "LBA",
+    "geo": [-1.66057,53.8659],
+    "cc": "GB",
+    "continent": "EU"
+  },
+  "flights": [
+    {
+      "id": "FR5041",
+      "time": "2020-01-10T06:05:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Bratislava", "IATA": "BTS", "geo": [17.2127,48.1702], "cc": "SK", "continent": "EU"},
+      "km": 1458.24,
+      "emissions": {"f": 11.5, "kg": 16769.75}
+    },
+    {
+      "id": "KL1540",
+      "time": "2020-01-10T06:10:00Z",
+      "airline": "KLM",
+      "aircraft": {"code": "E170", "name": "EMB ERJ170 (170-100)"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 8.9, "kg": 4115.93}
+    },
+    {
+      "id": "FR153",
+      "time": "2020-01-10T06:30:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.5, "kg": 3539.5}
+    }
+  ]
+}
