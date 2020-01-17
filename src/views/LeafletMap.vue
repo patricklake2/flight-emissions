@@ -34,12 +34,7 @@ export default {
       destinationlayer: null,
       destinations: [],
       startLat: 53.86589,
-      startLon: -1.66057,
-      svgStart:
-        '<?xml version="1.0" encoding="UTF-8"?><svg version="1.1" id="airport-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15" transform="rotate(',
-      svgEnd:
-        ')"><path id="path7712-0" d="M15,6.8182L15,8.5l-6.5-1&#xA;&#x9;l-0.3182,4.7727L11,14v1l-3.5-0.6818L4,15v-1l2.8182-1.7273L6.5,7.5L0,8.5V6.8182L6.5,4.5v-3c0,0,0-1.5,1-1.5s1,1.5,1,1.5v2.8182&#xA;&#x9;L15,6.8182z"/></svg>',
-      temp: ""
+      startLon: -1.66057
     };
   },
   props: ["items", "limits"],
@@ -139,7 +134,7 @@ export default {
       return reverse;
     },
     getSvgUrl(rotationAngle) {
-      var svg = this.svgStart + rotationAngle.toString() + this.svgEnd;
+      var svg = `<?xml version="1.0" encoding="UTF-8"?><svg version="1.1" id="airport-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15" transform="rotate(${rotationAngle.toString()})"><path id="path7712-0" d="M15,6.8182L15,8.5l-6.5-1&#xA;&#x9;l-0.3182,4.7727L11,14v1l-3.5-0.6818L4,15v-1l2.8182-1.7273L6.5,7.5L0,8.5V6.8182L6.5,4.5v-3c0,0,0-1.5,1-1.5s1,1.5,1,1.5v2.8182&#xA;&#x9;L15,6.8182z"/></svg>`;
       return "data:image/svg+xml;base64," + btoa(svg);
     },
     createPopupMsg(flights) {
