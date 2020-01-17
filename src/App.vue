@@ -69,7 +69,7 @@ export default {
       date: new Date(),
       flights: [],
       errorMessage: null,
-      rootIndex: {},
+      rootIndex: [],
       meta: {}
     };
   },
@@ -128,7 +128,7 @@ export default {
       "https://raw.githubusercontent.com/odileeds/flight-data/master/index.json";
     axios.get(indexURL).then(response => {
       this.rootIndex = response.data;
-      this.setAirport("LBA");
+      this.setAirport(2);
     });
   }
 };
