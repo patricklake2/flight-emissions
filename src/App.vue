@@ -15,11 +15,24 @@
     <div id="main">
       <div class="seasonal">
         <div class="holder">
-          <h1>Leeds Bradford Flight Emissions</h1>
+          <h1>Flight Emissions</h1>
+          <select v-model="currentIATA" class="button c14-bg">
+            <option disabled>Pick an airport...</option>
+            <option
+              v-for="item in rootIndex"
+              :key="item.IATA"
+              :value="item.IATA"
+              >{{ item.name }}</option
+            >
+          </select>
         </div>
       </div>
-      <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+      <div class="holder" v-if="errorMessage || !currentIATA">
+        <p v-if="!currentIATA">Please select an airport above.</p>
+        <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+      </div>
       <router-view
+        v-if="currentIATA"
         :items="flights"
         :meta="meta"
         :limits="quartiles"
@@ -66,16 +79,16 @@ export default {
   },
   data() {
     return {
-      date: new Date(),
       flights: [],
-      errorMessage: null,
       rootIndex: [],
-      meta: {}
+      meta: {},
+      currentIATA: null,
+      errorMessage: null
     };
   },
   computed: {
     routes() {
-      return this.$router.options.routes;
+      return this.$router.options.routes.filter(route => route.name);
     },
     quartiles() {
       var data = [];
@@ -95,6 +108,26 @@ export default {
       else return true;
     }
   },
+  watch: {
+    currentIATA(newValue) {
+      let pos = this.rootIndex.findIndex(item => item.IATA === newValue);
+      axios
+        .get(this.rootIndex[pos]["index"])
+        .then(response => {
+          this.meta = response.data;
+          let flightDataURL = `${
+            this.meta.directory
+          }${this.meta.lastupdate.substring(0, 10)}.json`;
+          return axios.get(flightDataURL);
+        })
+        .then(response => {
+          this.flights = response.data.flights;
+          // this.flights.forEach(fl => {
+          //   fl.time = new Date(fl.time);
+          // });
+        });
+    }
+  },
   methods: {
     percentile(arr, p) {
       if (arr.length === 0) return 0;
@@ -109,18 +142,6 @@ export default {
 
       if (upper >= arr.length) return arr[lower];
       return arr[lower] * (1 - weight) + arr[upper] * weight;
-    },
-    setAirport(iata) {
-      axios
-        .get(this.rootIndex[iata]["index"])
-        .then(response => {
-          this.meta = response.data;
-          let flightDataURL = `${this.meta.directory}${this.meta.lastupdate}.json`;
-          return axios.get(flightDataURL);
-        })
-        .then(response => {
-          this.flights = response.data.flights;
-        });
     }
   },
   mounted() {
@@ -128,8 +149,44 @@ export default {
       "https://raw.githubusercontent.com/odileeds/flight-data/master/index.json";
     axios.get(indexURL).then(response => {
       this.rootIndex = response.data;
-      this.setAirport(2);
+      if (this.$route.params) {
+        let iataFound = false;
+        this.rootIndex.forEach(entry => {
+          if (entry.IATA == this.$route.params.iataParam.toUpperCase()) {
+            this.currentIATA = this.$route.params.iataParam.toUpperCase();
+            iataFound = true;
+          }
+        });
+        if (!iataFound) this.$router.push("/");
+      }
     });
   }
 };
 </script>
+
+<style scoped>
+.seasonal {
+  overflow: auto;
+}
+h1 {
+  display: inline-block;
+  vertical-align: top;
+}
+select {
+  float: right;
+  -webkit-appearance: menulist-button;
+  -moz-appearance: menulist;
+}
+@media only screen and (max-width: 500px) {
+  .seasonal {
+    text-align: center;
+  }
+  h1 {
+    display: block;
+  }
+  select {
+    float: none;
+    margin-top: 10px;
+  }
+}
+</style>

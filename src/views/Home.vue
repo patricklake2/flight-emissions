@@ -1,13 +1,11 @@
 <template>
   <div class="holder">
     <p>
-      This is a simple tool to demonstrate the impact Leeds' Bradford Airport
-      has on the environment, since international flights are not included in
-      local or national carbon budgets (even though they account for roughly 95%
-      of total aviation emissions). It's fairly simple; it just takes all the
-      daily departures from Leeds Bradford, and shows you how much CO<sub
-        >2</sub
-      >
+      This is a simple tool to demonstrate the impact airports have on the
+      environment, since international flights are not included in local or
+      national carbon budgets (even though they account for roughly 95% of total
+      aviation emissions). It's fairly simple; it just takes all the daily
+      departures from a given airport, and shows you how much CO<sub>2</sub>
       emissions each flight produces, along with a daily total.
     </p>
     <ul class="grid">

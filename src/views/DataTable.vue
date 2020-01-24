@@ -1,10 +1,10 @@
 <template>
   <v-app id="inspire">
     <div class="holder">
-      <div id="holder">
-        <img src="../assets/departures.png" />
-        <h2 id="departures">Departures</h2>
-      </div>
+      <!-- <div id="holder"> -->
+      <img src="../assets/departures.png" />
+      <h2 id="departures">Departures</h2>
+      <!-- </div> -->
       <v-data-table
         :headers="headers"
         :items="items"

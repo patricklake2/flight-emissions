@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import About from "../views/About.vue";
+import ViewData from "../views/ViewData.vue";
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [
       location.href = "https://odileeds.org";
     },
     name: "ODI Leeds"
+  },
+  {
+    path: "/table",
+    name: "Table2",
+    component: ViewData
   }
 ];
 
