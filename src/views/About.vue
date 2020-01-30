@@ -2,52 +2,88 @@
   <div class="holder">
     <h2>About</h2>
     <p>
-      I built this tool to demonstrate the impact Leeds' Bradford Airport has on
-      the environment, since international flights are not included in local or
-      national carbon budgets (even though they account for roughly 95% of total
-      aviation emissions). It's fairly simple; it just takes all the daily
-      departures from Leeds Bradford, and shows you how much CO2 emissions each
-      flight produces, along with a daily total.
+      This website was built to demonstrate the impact international flights
+      have on the environment, since they are not included in local or national
+      carbon budgets (even though they account for roughly 95% of total aviation
+      emissions).
+    </p>
+
+    <p>
+      It simply shows daily flights and emissions from a given airport, along
+      with some simple comparisons to highlight just how big those emission
+      figures are.
+    </p>
+
+    <p>
+      The tool is powered by our
+      <a href="https://github.com/odileeds/flight-data"
+        >flight data index on GitHub</a
+      >. Anyone can volunteer to collect flight data for a specific airport,
+      which they are responsible for hosting - they can then add the link to our
+      centralised index, and the airport will be automatically added to this
+      site.
     </p>
 
     <h3>Data</h3>
 
     <p>
-      Departures data is taken directly from Leeds Bradford Airport's website.
-      The distance can then be calculated by using the latitude &amp; longitude
-      of the destination airport (using data from
-      <a href="https://openflights.org/data.html">OpenFlights.org</a>).
-      <a href="https://flightaware.com">FlightAware</a>'s API is used to search
-      for the aircraft model used for each flight. The emissions factor for that
-      aircraft, given in
+      We host a centralised
+      <a href="https://github.com/odileeds/flight-data"
+        >flight data GitHub repo</a
+      >, which simply contains an index with a list of airports data is being
+      collected for, and where this data is stored. Anyone can volunteer to
+      collect flight data for a specific airport, which they are responsible for
+      hosting - they can then add the link to our index file, and the airport
+      will be automatically added to this site. You can see our
+      <a
+        href="https://github.com/patricklake2/flight-emissions/tree/master/leeds-bradford"
+        >sample methodology and code for Leeds Bradford Airport on GitHub.</a
+      ><strong>
+        All of the data is freely available for anyone to access and
+        reuse.</strong
+      >
+    </p>
+
+    <h4>Sources</h4>
+    <p>
+      In some cases departures data has been taken directly from the airport's
+      website, but most of the airports we've added ourselves use
+      <a href="https://flightaware.com">FlightAware's</a> API. We also use
+      airport location data from
+      <a href="https://openflights.org/data.html">OpenFlights.org</a>. The
+      emission factors we use for different aircraft are taken from
       <a
         href="https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2019"
       >
-        DEFRA's 2019 GHG Conversion Factors </a
-      >, is then multiplied by the distance to give an estimate for emissions.
-      <br />All of this processing is done by a Python script which runs at
-      midnight, processing that day's flights.
+        DEFRA's 2019 GHG Conversion Factors
+      </a>
     </p>
 
-    <h3>Things I'm working on</h3>
+    <h3>Improvements</h3>
+    <p>I'm working on a few more things, including:</p>
     <ul>
       <li>
         Adding a date picker, and the ability to compare days - at the moment
         the website only shows the current day's data
       </li>
       <li>
-        Adding more airports. Manchester Airport will be next (very shortly!)
+        Allowing the user to select more than one airport at once, and either
+        display total figures, or show two airports side-by-side for comparison.
       </li>
       <li>
-        Looking for a way to determine the aircraft model for each flight
-        <strong>without</strong> using FlightAware, as this is not open data.
+        Getting more airports! We need help with this - take a look at our
+        GitHub repo for instructions if you're interested, or get in touch.
       </li>
     </ul>
     <p>
-      Feedback, comments, ideas and contributions are all welcomed - all the
-      code is on
-      <a href="https://github.com/patricklake2/leeds-flight-emissions">GitHub</a
-      >. You can also <a href="https://twitter.com/PatrickTLake">tweet me.</a>
+      The source code for this website is also
+      <a href="https://github.com/patricklake2/flight-emissions">on GitHub</a>
+      if you want to take a look.
+    </p>
+    <p>
+      Feedback, comments, ideas and contributions are all welcomed -
+      <a href="mailto:patrick.lake@odileeds.org">email</a> or
+      <a href="https://twitter.com/PatrickTLake">tweet</a> me.
     </p>
   </div>
 </template>

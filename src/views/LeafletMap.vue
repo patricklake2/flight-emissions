@@ -1,7 +1,7 @@
 <template>
   <div class="holder">
     <div class="map-holder">
-      <div v-if="items" id="flight-map"></div>
+      <div v-if="flights" id="flight-map"></div>
     </div>
     <p>
       <strong>Note: </strong>Currently the emissions shown are per flight, not
@@ -14,12 +14,10 @@
 <script>
 import "leaflet/dist/leaflet.css";
 var L = require("leaflet");
+import getPercentile from "../lib/percentile.js";
 
-// below code is to fix leaflet icon not showing
-
-// eslint-disable-next-line
+// below code is to fix default leaflet marker icon not showing
 delete L.Icon.Default.prototype._getIconUrl;
-// eslint-disable-next-line
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
   iconUrl: require("leaflet/dist/images/marker-icon.png"),
@@ -31,16 +29,28 @@ export default {
   data: function() {
     return {
       mymap: null,
-      destinationlayer: null,
+      flightLayer: null,
       destinations: [],
       startLat: 53.86589,
       startLon: -1.66057
     };
   },
-  props: ["items", "limits"],
+  props: {
+    flights: {
+      type: Array,
+      required: true
+    },
+    from: {
+      type: Object,
+      required: true
+    }
+  },
   watch: {
-    items() {
-      this.addDests();
+    flights() {
+      this.populateMap();
+    },
+    from() {
+      this.populateMap();
     }
   },
   mounted() {
@@ -56,90 +66,93 @@ export default {
           "pk.eyJ1IjoicGF0cmljay1sYWtlIiwiYSI6ImNrMnl4Z2c1eDAycmgzb3A2cHVhdTVjancifQ.K5-h5nZk-onKDRbJmIQmHg"
       }
     ).addTo(this.mymap);
-    var leeds = L.marker([this.startLat, this.startLon]).addTo(this.mymap);
-    leeds.bindPopup("<b>Leeds Bradford Airport</b>").openPopup();
-    this.destinationlayer = L.layerGroup().addTo(this.mymap);
-    this.addDests();
+    this.flightLayer = L.layerGroup().addTo(this.mymap);
+    this.populateMap();
   },
   methods: {
-    addDests() {
-      var uniqueDests = [];
-      for (let flight of this.items) {
-        if (!uniqueDests.includes(flight["to"]["IATA"])) {
-          uniqueDests.push(flight["to"]["IATA"]);
-        }
-      }
-      var groupedByDest = [];
-      for (let airport of uniqueDests) {
-        groupedByDest.push(
-          this.items.filter(fl => fl["to"]["IATA"] == airport)
+    populateMap() {
+      if (this.from.geo && this.flights) {
+        this.flightLayer.clearLayers();
+        var origin = L.marker([this.from.geo[1], this.from.geo[0]]).addTo(
+          this.flightLayer
         );
-      }
-      for (let group of groupedByDest) {
-        var bearing = this.getBearing(
-          group[0]["to"]["geo"][1],
-          group[0]["to"]["geo"][0],
-          this.startLat,
-          this.startLon
-        );
-        var iconSvg = this.getSvgUrl(bearing);
-        var icon = L.icon({
-          iconUrl: iconSvg,
-          iconSize: [28, 28],
-          iconAnchor: [14, 14]
-        });
-        var polyLine = L.polyline(
-          [
-            [this.startLat, this.startLon],
-            [group[0]["to"]["geo"][1], group[0]["to"]["geo"][0]]
-          ],
-          {
-            color: "red",
-            weight: 1.5,
-            dashArray: "10 30"
+        origin.bindPopup(`<b>${this.from.n}</b>`).openPopup();
+        var uniqueDests = [];
+        for (let flight of this.flights) {
+          if (!uniqueDests.includes(flight["to"]["IATA"])) {
+            uniqueDests.push(flight["to"]["IATA"]);
           }
-        );
-        var message = this.createPopupMsg(group);
-        var marker = L.marker(
-          [group[0]["to"]["geo"][1], group[0]["to"]["geo"][0]],
-          { icon: icon }
-        ).addTo(this.destinationlayer);
-        marker.bindPopup(message, { className: "popup" });
-        polyLine.addTo(this.destinationlayer);
+        }
+        var groupedByDest = [];
+        for (let airport of uniqueDests) {
+          groupedByDest.push(
+            this.flights.filter(fl => fl["to"]["IATA"] == airport)
+          );
+        }
+        for (let group of groupedByDest) {
+          var bearing = this.getBearing(
+            group[0]["to"]["geo"][1],
+            group[0]["to"]["geo"][0],
+            this.from.geo[1],
+            this.from.geo[0]
+          );
+          var iconSvg = this.getSVG(bearing);
+          var icon = L.icon({
+            iconUrl: iconSvg,
+            iconSize: [28, 28],
+            iconAnchor: [14, 14]
+          });
+          var polyLine = L.polyline(
+            [
+              [this.from.geo[1], this.from.geo[0]],
+              [group[0]["to"]["geo"][1], group[0]["to"]["geo"][0]]
+            ],
+            {
+              color: "red",
+              weight: 1.5,
+              dashArray: "10 30"
+            }
+          );
+          var message = this.createPopupMsg(group);
+          var marker = L.marker(
+            [group[0]["to"]["geo"][1], group[0]["to"]["geo"][0]],
+            { icon: icon }
+          ).addTo(this.flightLayer);
+          marker.bindPopup(message, { className: "popup" });
+          polyLine.addTo(this.flightLayer);
+        }
       }
     },
 
     getBearing(lat1, lon1, lat2, lon2) {
-      var degrees = function(rad) {
-        var pi = Math.PI;
-        return rad * (180 / pi);
+      const toDegrees = rad => {
+        return rad * (180 / Math.PI);
       };
-      var radians = function(deg) {
-        var pi = Math.PI;
-        return deg * (pi / 180);
+      const toRadians = deg => {
+        return deg * (Math.PI / 180);
       };
-      (lat1 = radians(lat1)),
-        (lon1 = radians(lon1)),
-        (lat2 = radians(lat2)),
-        (lon2 = radians(lon2));
-      var y = Math.sin(lon2 - lon1) * Math.cos(lat2);
-      var x =
+      lat1 = toRadians(lat1);
+      lon1 = toRadians(lon1);
+      lat2 = toRadians(lat2);
+      lon2 = toRadians(lon2);
+      let y = Math.sin(lon2 - lon1) * Math.cos(lat2);
+      let x =
         Math.cos(lat1) * Math.sin(lat2) -
         Math.sin(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1);
-      var brng = Math.atan2(y, x);
-      var deg = degrees(brng);
-      var normalised = (deg + 360) % 360;
+      let brng = Math.atan2(y, x);
+      let deg = toDegrees(brng);
+      let normalised = (deg + 360) % 360;
       normalised = Math.round(normalised * 100) / 100;
-      var reverse = (normalised + 180) % 360;
+      let reverse = (normalised + 180) % 360;
       return reverse;
     },
-    getSvgUrl(rotationAngle) {
-      var svg = `<?xml version="1.0" encoding="UTF-8"?><svg version="1.1" id="airport-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15" transform="rotate(${rotationAngle.toString()})"><path id="path7712-0" d="M15,6.8182L15,8.5l-6.5-1&#xA;&#x9;l-0.3182,4.7727L11,14v1l-3.5-0.6818L4,15v-1l2.8182-1.7273L6.5,7.5L0,8.5V6.8182L6.5,4.5v-3c0,0,0-1.5,1-1.5s1,1.5,1,1.5v2.8182&#xA;&#x9;L15,6.8182z"/></svg>`;
+    getSVG(rotationAngle) {
+      const svg = `<?xml version="1.0" encoding="UTF-8"?><svg version="1.1" id="airport-15" xmlns="http://www.w3.org/2000/svg" width="15px" height="15px" viewBox="0 0 15 15" transform="rotate(${rotationAngle.toString()})"><path id="path7712-0" d="M15,6.8182L15,8.5l-6.5-1&#xA;&#x9;l-0.3182,4.7727L11,14v1l-3.5-0.6818L4,15v-1l2.8182-1.7273L6.5,7.5L0,8.5V6.8182L6.5,4.5v-3c0,0,0-1.5,1-1.5s1,1.5,1,1.5v2.8182&#xA;&#x9;L15,6.8182z"/></svg>`;
       return "data:image/svg+xml;base64," + btoa(svg);
     },
     createPopupMsg(flights) {
-      let popup_msg = ``;
-      popup_msg += `<div class="box"><h3>${flights[0]["to"]["n"]} - ${flights[0]["to"]["IATA"]}</h3>`;
+      let msg = ``;
+      msg += `<div class="box"><h3>${flights[0]["to"]["n"]} - ${flights[0]["to"]["IATA"]}</h3>`;
       let max_width = 150;
       let max_emissions = flights[0]["emissions"]["kg"];
       for (let flight of flights) {
@@ -149,7 +162,7 @@ export default {
       }
       for (let flight of flights) {
         let width = (flight["emissions"]["kg"] / max_emissions) * max_width;
-        popup_msg += `<div class="bar" style="width: ${width}px; background-color: ${this.getColor(
+        msg += `<div class="bar" style="width: ${width}px; background-color: ${this.getColor(
           flight["emissions"]["kg"]
         )};">${Math.round(
           flight["emissions"]["kg"]
@@ -157,13 +170,23 @@ export default {
           flight["airline"]
         }</p><br>`;
       }
-      popup_msg += `</div>`;
-      return popup_msg;
+      msg += `</div>`;
+      return msg;
     },
-    getColor(Emissions) {
-      if (Emissions < this.limits[0]) return "green";
-      else if (Emissions < this.limits[1]) return "orange";
+    getColor(emissions) {
+      if (emissions < this.emissionQuartiles[0]) return "green";
+      else if (emissions < this.emissionQuartiles[1]) return "orange";
       else return "red";
+    }
+  },
+  computed: {
+    emissionQuartiles() {
+      let emissionsArr = this.flights.map(fl => fl.emissions.kg);
+      emissionsArr.sort((a, b) => a - b);
+      return [
+        getPercentile(emissionsArr, 0.25),
+        getPercentile(emissionsArr, 0.75)
+      ];
     }
   }
 };

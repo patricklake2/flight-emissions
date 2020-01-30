@@ -21,7 +21,7 @@ const routes = [
     path: "/data",
     name: "Data",
     component: () =>
-      import(/* webpackChunkName: "Data" */ "../views/DataTable.vue")
+      import(/* webpackChunkName: "Table" */ "../views/TableView.vue")
   },
   {
     path: "/about",
@@ -34,10 +34,16 @@ const routes = [
       location.href = "https://odileeds.org";
     },
     name: "ODI Leeds"
+  },
+  {
+    path: "*",
+    redirect: "/"
   }
 ];
 
 const router = new VueRouter({
+  mode: "history",
+  base: "/projects/flight-emissions/daily/",
   routes
 });
 

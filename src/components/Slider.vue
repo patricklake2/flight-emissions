@@ -7,8 +7,8 @@
     <ul class="my-slider">
       <li v-for="item in items" :key="item.caption" :class="item.color">
         <div>
-          <h3>{{ item.value.toLocaleString() }}</h3>
-          <p>{{ item.caption }}</p>
+          <p class="big">{{ item.value.toLocaleString() }}</p>
+          <p class="caption">{{ item.caption }}</p>
         </div>
       </li>
     </ul>
@@ -41,12 +41,12 @@ li {
   text-align: center;
 }
 
-p {
+p.caption {
   line-height: 0.8;
   font-size: 1.5em;
 }
 
-h3 {
+p.big {
   font-size: 7vmax;
   line-height: 120%;
 }

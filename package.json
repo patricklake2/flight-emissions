@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-report": "vue-cli-service build --report"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^18.5.0",
@@ -14,8 +15,7 @@
     "leaflet": "^1.6.0",
     "tiny-slider": "^2.9.2",
     "vue": "^2.6.11",
-    "vue-router": "^3.1.5",
-    "vuetify": "^2.2.4"
+    "vue-router": "^3.1.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.2",
@@ -31,7 +31,6 @@
     "prettier": "^1.19.1",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
-    "vue-cli-plugin-vuetify": "^2.0.3",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.4.3"
   },

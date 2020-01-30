@@ -1,28 +1,28 @@
 <template>
   <div>
-    <div v-if="!correctURL" class="c12-bg" style="text-align: center;">
-      <div class="holder">
-        Note: You can now access this page through the
-        <a
-          href="https://odileeds.org/projects/flight-emissions"
-          style="color: blue;"
-          >ODI Leeds website</a
-        >
-        - more projects coming soon!
-      </div>
-    </div>
-    <nav-bar :pages="routes"></nav-bar>
+    <nav-bar />
     <div id="main">
       <div class="seasonal">
         <div class="holder">
-          <h1>Leeds Bradford Flight Emissions</h1>
+          <h1>Flight Emissions</h1>
+          <select v-model="iata" class="button c14-bg">
+            <option disabled>Pick an airport...</option>
+            <option
+              v-for="item in $root.rootIndex"
+              :key="item.IATA"
+              :value="item.IATA"
+              >{{ item.name }}</option
+            >
+          </select>
         </div>
       </div>
-      <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+      <div class="holder" v-if="!iata && !$route.path.startsWith('/about')">
+        <p>Please select an airport above.</p>
+      </div>
       <router-view
-        :items="flights"
-        :meta="meta"
-        :limits="quartiles"
+        v-if="iata || $route.path.startsWith('/about')"
+        :flights="flights"
+        :from="from"
       ></router-view>
     </div>
     <footer class="b1-bg">
@@ -55,81 +55,82 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
-const axios = require("axios").default;
+import axios from "axios";
 
 export default {
   components: {
     NavBar
   },
-  props: {
-    source: String
-  },
   data() {
     return {
-      date: new Date(),
-      flights: [],
-      errorMessage: null,
-      rootIndex: [],
-      meta: {}
+      meta: {},
+      from: {},
+      flights: []
     };
   },
-  computed: {
-    routes() {
-      return this.$router.options.routes;
-    },
-    quartiles() {
-      var data = [];
-      for (let flight of this.flights) {
-        data.push(flight["emissions"]["kg"]);
+  methods: {
+    async updateData() {
+      if (this.$route.query.from) {
+        let q = this.$route.query.from.toUpperCase();
+        let entry = this.$root.rootIndex.find(item => item.IATA === q);
+        if (entry) {
+          const metaResponse = await axios.get(entry.index);
+          this.meta = metaResponse.data;
+          let flightDataURL = `${
+            this.meta.directory
+          }${this.meta.lastupdate.substring(0, 10)}.json`;
+          const flightsResponse = await axios.get(flightDataURL);
+          this.flights = flightsResponse.data.flights;
+          this.from = flightsResponse.data.from;
+        } else this.$router.push(this.$route.path);
       }
-      data.sort(function(a, b) {
-        return a - b;
-      });
-      let q1 = this.percentile(data, 0.33);
-      let q2 = this.percentile(data, 0.75);
-      return [q1, q2];
-    },
-    correctURL() {
-      let host = window.location.hostname;
-      if (host != "odileeds.org") return false;
-      else return true;
     }
   },
-  methods: {
-    percentile(arr, p) {
-      if (arr.length === 0) return 0;
-      if (typeof p !== "number") throw new TypeError("p must be a number");
-      if (p <= 0) return arr[0];
-      if (p >= 1) return arr[arr.length - 1];
-
-      var index = arr.length * p,
-        lower = Math.floor(index),
-        upper = lower + 1,
-        weight = index % 1;
-
-      if (upper >= arr.length) return arr[lower];
-      return arr[lower] * (1 - weight) + arr[upper] * weight;
-    },
-    setAirport(iata) {
-      axios
-        .get(this.rootIndex[iata]["index"])
-        .then(response => {
-          this.meta = response.data;
-          let flightDataURL = `${this.meta.directory}${this.meta.lastupdate}.json`;
-          return axios.get(flightDataURL);
-        })
-        .then(response => {
-          this.flights = response.data.flights;
-        });
+  computed: {
+    iata: {
+      get() {
+        if (this.$route.query.from) return this.$route.query.from.toUpperCase();
+        else return null;
+      },
+      set(newVal) {
+        this.$router.push({ query: { ...this.$route.query, from: newVal } });
+      }
+    }
+  },
+  watch: {
+    "$route.query.from": function() {
+      this.updateData();
     }
   },
   mounted() {
-    let indexURL =
-      "https://raw.githubusercontent.com/odileeds/flight-data/master/index.json";
-    axios.get(indexURL).then(response => {
-      this.rootIndex = response.data;
-      this.setAirport(2);
-    });
+    this.updateData();
   }
 };
 </script>
+
+<style scoped>
+.seasonal {
+  overflow: auto;
+}
+h1 {
+  display: inline-block;
+  vertical-align: top;
+}
+select {
+  float: right;
+  -webkit-appearance: menulist-button;
+  -moz-appearance: menulist;
+}
+@media only screen and (max-width: 500px) {
+  .seasonal {
+    text-align: center;
+  }
+  h1 {
+    display: block;
+  }
+  select {
+    float: none;
+    margin-top: 10px;
+  }
+}
+</style>

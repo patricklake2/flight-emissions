@@ -19,7 +19,10 @@
         <nav>
           <ul>
             <li v-for="page in pages" :key="page.name">
-              <router-link :to="page.path" exact-active-class="seasonal">
+              <router-link
+                :to="{ path: page.path, query: { ...$route.query } }"
+                :class="{ seasonal: $route.path == page.path }"
+              >
                 {{ page.name }}
               </router-link>
             </li>
@@ -32,6 +35,11 @@
 
 <script>
 export default {
-  props: ["pages"]
+  name: "navbar",
+  computed: {
+    pages() {
+      return this.$router.options.routes.filter(route => route.name);
+    }
+  }
 };
 </script>
