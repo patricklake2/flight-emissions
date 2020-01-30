@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /projects/flight-emissions/daily/
+RewriteRule ^/projects/flight-emissions/daily/index\.html$ - [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /projects/flight-emissions/daily/index.html [QSA,L]

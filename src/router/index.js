@@ -2,7 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import About from "../views/About.vue";
-import ViewData from "../views/ViewData.vue";
 
 Vue.use(VueRouter);
 
@@ -22,7 +21,7 @@ const routes = [
     path: "/data",
     name: "Data",
     component: () =>
-      import(/* webpackChunkName: "Data" */ "../views/DataTable.vue")
+      import(/* webpackChunkName: "Table" */ "../views/TableView.vue")
   },
   {
     path: "/about",
@@ -37,13 +36,14 @@ const routes = [
     name: "ODI Leeds"
   },
   {
-    path: "/table",
-    name: "Table2",
-    component: ViewData
+    path: "*",
+    redirect: "/"
   }
 ];
 
 const router = new VueRouter({
+  mode: "history",
+  base: "/projects/flight-emissions/daily/",
   routes
 });
 

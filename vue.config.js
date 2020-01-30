@@ -1,4 +1,9 @@
 module.exports = {
-  transpileDependencies: ["vuetify"],
-  publicPath: process.env.NODE_ENV === "production" ? "/flight-emissions/" : "/"
+  publicPath:
+    process.env.NODE_ENV === "production"
+      ? "/projects/flight-emissions/daily/"
+      : "/",
+  chainWebpack: config => {
+    config.plugins.delete("prefetch");
+  }
 };

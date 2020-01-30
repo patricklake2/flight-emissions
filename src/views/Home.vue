@@ -4,9 +4,10 @@
       This is a simple tool to demonstrate the impact airports have on the
       environment, since international flights are not included in local or
       national carbon budgets (even though they account for roughly 95% of total
-      aviation emissions). It's fairly simple; it just takes all the daily
-      departures from a given airport, and shows you how much CO<sub>2</sub>
-      emissions each flight produces, along with a daily total.
+      aviation emissions). It simply takes all the daily departures from a given
+      airport, and shows you how much CO<sub>2</sub>
+      emissions each flight produces, along with a daily total and some nice
+      stats.
     </p>
     <ul class="grid">
       <li class="threecol">
@@ -70,7 +71,7 @@ export default {
     Slider
   },
   props: {
-    items: {
+    flights: {
       type: Array,
       required: true
     }
@@ -123,25 +124,25 @@ export default {
   },
   computed: {
     totalEmissions() {
-      if (this.items.length != 0) {
-        let arr = this.items.map(fl => fl["emissions"]["kg"]);
+      if (this.flights.length != 0) {
+        let arr = this.flights.map(fl => fl["emissions"]["kg"]);
         const sum = (acc, current) => acc + current;
         return arr.reduce(sum);
       } else return 0;
     },
     numberFlights() {
-      return this.items.length;
+      return this.flights.length;
     },
     distanceTravelled() {
-      if (this.items.length != 0) {
-        let arr = this.items.map(fl => fl["km"]);
+      if (this.flights.length != 0) {
+        let arr = this.flights.map(fl => fl["km"]);
         const sum = (acc, current) => acc + current;
         return arr.reduce(sum);
       } else return 0;
     },
     uniqueDests() {
       var destIATAs = [];
-      for (var flight of this.items) {
+      for (var flight of this.flights) {
         if (!destIATAs.includes(flight["to"]["IATA"])) {
           destIATAs.push(flight["to"]["IATA"]);
         }
@@ -164,7 +165,7 @@ export default {
   methods: {
     sumFlightsProp: function(prop) {
       var total = 0;
-      for (var flight of this.items) {
+      for (var flight of this.flights) {
         total += flight[prop];
       }
       return total;
