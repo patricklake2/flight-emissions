@@ -1,0 +1,299 @@
+{
+  "from": {
+    "n": "Leeds Bradford",
+    "IATA": "LBA",
+    "geo": [-1.66057,53.8659],
+    "cc": "GB",
+    "continent": "EU"
+  },
+  "flights": [
+    {
+      "id": "KL1540",
+      "time": "2020-02-10T06:10:00Z",
+      "airline": "KLM",
+      "aircraft": {"code": "E190", "name": "EMBRAER ERJ190"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 10.2, "kg": 4717.13}
+    },
+    {
+      "id": "FR2446",
+      "time": "2020-02-10T06:20:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Malaga", "IATA": "AGP", "geo": [-4.49911,36.6749], "cc": "ES", "continent": "EU"},
+      "km": 1924.02,
+      "emissions": {"f": 11.5, "kg": 22126.24}
+    },
+    {
+      "id": "FR153",
+      "time": "2020-02-10T06:30:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.5, "kg": 3539.5}
+    },
+    {
+      "id": "LS201",
+      "time": "2020-02-10T06:50:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B733", "name": "BOEING 737-300"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 11.6, "kg": 5364.58}
+    },
+    {
+      "id": "BE7600",
+      "time": "2020-02-10T06:50:00Z",
+      "airline": "flybe",
+      "aircraft": {"code": "JS41", "name": ""},
+      "to": {"n": "Southampton", "IATA": "SOU", "geo": [-1.3568,50.9503], "cc": "GB", "continent": "EU"},
+      "km": 324.85,
+      "emissions": {"f": 11.1, "kg": 3605.87}
+    },
+    {
+      "id": "BE730",
+      "time": "2020-02-10T08:05:00Z",
+      "airline": "flybe",
+      "aircraft": {"code": "DH8D", "name": "BOMBARDIER DASH 8 Q400"},
+      "to": {"n": "Belfast City", "IATA": "BHD", "geo": [-5.8725,54.6181], "cc": "GB", "continent": "EU"},
+      "km": 286.13,
+      "emissions": {"f": 7.1, "kg": 2031.51}
+    },
+    {
+      "id": "LS223",
+      "time": "2020-02-10T08:20:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Tenerife South", "IATA": "TFS", "geo": [-16.5725,28.0445], "cc": "ES", "continent": "EU"},
+      "km": 3117.78,
+      "emissions": {"f": 11.5, "kg": 35854.44}
+    },
+    {
+      "id": "EI3391",
+      "time": "2020-02-10T08:25:00Z",
+      "airline": "Aer Lingus",
+      "aircraft": {"code": "AT72", "name": "ATR72 200/500/600"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 5.2, "kg": 1600.47}
+    },
+    {
+      "id": "LS285",
+      "time": "2020-02-10T09:00:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Geneva", "IATA": "GVA", "geo": [6.10895,46.2381], "cc": "CH", "continent": "EU"},
+      "km": 1012.15,
+      "emissions": {"f": 11.5, "kg": 11639.67}
+    },
+    {
+      "id": "LS217",
+      "time": "2020-02-10T09:00:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B752", "name": "BOEING 757-200"},
+      "to": {"n": "Arrecife", "IATA": "ACE", "geo": [-13.6052,28.9455], "cc": "ES", "continent": "EU"},
+      "km": 2935.41,
+      "emissions": {"f": 14.7, "kg": 43150.51}
+    },
+    {
+      "id": "LS243",
+      "time": "2020-02-10T09:20:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Tenerife South", "IATA": "TFS", "geo": [-16.5725,28.0445], "cc": "ES", "continent": "EU"},
+      "km": 3117.78,
+      "emissions": {"f": 11.5, "kg": 35854.44}
+    },
+    {
+      "id": "FR5041",
+      "time": "2020-02-10T09:30:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Bratislava", "IATA": "BTS", "geo": [17.2127,48.1702], "cc": "SK", "continent": "EU"},
+      "km": 1458.24,
+      "emissions": {"f": 11.5, "kg": 16769.75}
+    },
+    {
+      "id": "LS185",
+      "time": "2020-02-10T10:00:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Malaga", "IATA": "AGP", "geo": [-4.49911,36.6749], "cc": "ES", "continent": "EU"},
+      "km": 1924.02,
+      "emissions": {"f": 11.5, "kg": 22126.24}
+    },
+    {
+      "id": "KL1546",
+      "time": "2020-02-10T10:00:00Z",
+      "airline": "KLM",
+      "aircraft": {"code": "E190", "name": "EMBRAER ERJ190"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 10.2, "kg": 4717.13}
+    },
+    {
+      "id": "LS271",
+      "time": "2020-02-10T10:50:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Alicante", "IATA": "ALC", "geo": [-0.55816,38.2822], "cc": "ES", "continent": "EU"},
+      "km": 1734.86,
+      "emissions": {"f": 11.5, "kg": 19950.88}
+    },
+    {
+      "id": "LS315",
+      "time": "2020-02-10T11:00:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B733", "name": "BOEING 737-300"},
+      "to": {"n": "Paris Cdg", "IATA": "CDG", "geo": [2.55,49.0128], "cc": "FR", "continent": "EU"},
+      "km": 613.25,
+      "emissions": {"f": 11.6, "kg": 7113.65}
+    },
+    {
+      "id": "BA1347",
+      "time": "2020-02-10T11:10:00Z",
+      "airline": "British Airways",
+      "aircraft": {"code": "A319", "name": "AIRBUS A319"},
+      "to": {"n": "London Heathrow", "IATA": "LHR", "geo": [-0.46194,51.4706], "cc": "GB", "continent": "EU"},
+      "km": 278.33,
+      "emissions": {"f": 14.9, "kg": 4147.09}
+    },
+    {
+      "id": "BE732",
+      "time": "2020-02-10T11:20:00Z",
+      "airline": "flybe",
+      "aircraft": {"code": "DH8D", "name": "BOMBARDIER DASH 8 Q400"},
+      "to": {"n": "Belfast City", "IATA": "BHD", "geo": [-5.8725,54.6181], "cc": "GB", "continent": "EU"},
+      "km": 286.13,
+      "emissions": {"f": 7.1, "kg": 2031.51}
+    },
+    {
+      "id": "FR1503",
+      "time": "2020-02-10T12:10:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Gdansk", "IATA": "GDN", "geo": [18.4662,54.3776], "cc": "PL", "continent": "EU"},
+      "km": 1308.38,
+      "emissions": {"f": 11.5, "kg": 15046.33}
+    },
+    {
+      "id": "BE7604",
+      "time": "2020-02-10T13:10:00Z",
+      "airline": "flybe",
+      "aircraft": {"code": "JS41", "name": ""},
+      "to": {"n": "Southampton", "IATA": "SOU", "geo": [-1.3568,50.9503], "cc": "GB", "continent": "EU"},
+      "km": 324.85,
+      "emissions": {"f": 11.1, "kg": 3605.87}
+    },
+    {
+      "id": "LS295",
+      "time": "2020-02-10T15:00:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Krakow", "IATA": "KRK", "geo": [19.7848,50.0777], "cc": "PL", "continent": "EU"},
+      "km": 1521.58,
+      "emissions": {"f": 11.5, "kg": 17498.21}
+    },
+    {
+      "id": "EI3393",
+      "time": "2020-02-10T15:35:00Z",
+      "airline": "Aer Lingus",
+      "aircraft": {"code": "", "name": ""},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.8, "kg": 3631.84}
+    },
+    {
+      "id": "FR9079",
+      "time": "2020-02-10T15:55:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Alicante", "IATA": "ALC", "geo": [-0.55816,38.2822], "cc": "ES", "continent": "EU"},
+      "km": 1734.86,
+      "emissions": {"f": 11.5, "kg": 19950.88}
+    },
+    {
+      "id": "BE753",
+      "time": "2020-02-10T16:15:00Z",
+      "airline": "flybe",
+      "aircraft": {"code": "DH8D", "name": "BOMBARDIER DASH 8 Q400"},
+      "to": {"n": "Newquay", "IATA": "NQY", "geo": [-4.99541,50.4406], "cc": "GB", "continent": "EU"},
+      "km": 443.54,
+      "emissions": {"f": 7.1, "kg": 3149.14}
+    },
+    {
+      "id": "LS205",
+      "time": "2020-02-10T16:30:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B733", "name": "BOEING 737-300"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 11.6, "kg": 5364.58}
+    },
+    {
+      "id": "BE7606",
+      "time": "2020-02-10T17:10:00Z",
+      "airline": "flybe",
+      "aircraft": {"code": "JS41", "name": ""},
+      "to": {"n": "Southampton", "IATA": "SOU", "geo": [-1.3568,50.9503], "cc": "GB", "continent": "EU"},
+      "km": 324.85,
+      "emissions": {"f": 11.1, "kg": 3605.87}
+    },
+    {
+      "id": "KL1550",
+      "time": "2020-02-10T17:15:00Z",
+      "airline": "KLM",
+      "aircraft": {"code": "E190", "name": "EMBRAER ERJ190"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 10.2, "kg": 4717.13}
+    },
+    {
+      "id": "BA1345",
+      "time": "2020-02-10T17:40:00Z",
+      "airline": "British Airways",
+      "aircraft": {"code": "A319", "name": "AIRBUS A319"},
+      "to": {"n": "London Heathrow", "IATA": "LHR", "geo": [-0.46194,51.4706], "cc": "GB", "continent": "EU"},
+      "km": 278.33,
+      "emissions": {"f": 14.9, "kg": 4147.09}
+    },
+    {
+      "id": "EI3395",
+      "time": "2020-02-10T19:00:00Z",
+      "airline": "Aer Lingus",
+      "aircraft": {"code": "", "name": ""},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.8, "kg": 3631.84}
+    },
+    {
+      "id": "FR157",
+      "time": "2020-02-10T19:25:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.5, "kg": 3539.5}
+    },
+    {
+      "id": "BE740",
+      "time": "2020-02-10T20:00:00Z",
+      "airline": "flybe",
+      "aircraft": {"code": "DH8D", "name": "BOMBARDIER DASH 8 Q400"},
+      "to": {"n": "Belfast City", "IATA": "BHD", "geo": [-5.8725,54.6181], "cc": "GB", "continent": "EU"},
+      "km": 286.13,
+      "emissions": {"f": 7.1, "kg": 2031.51}
+    },
+    {
+      "id": "FR4107",
+      "time": "2020-02-10T20:10:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Wroclaw", "IATA": "WRO", "geo": [16.8858,51.1027], "cc": "PL", "continent": "EU"},
+      "km": 1288.83,
+      "emissions": {"f": 11.5, "kg": 14821.57}
+    }
+  ]
+}
