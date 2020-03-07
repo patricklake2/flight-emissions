@@ -1,5 +1,7 @@
 # Instructions
 
+### **Important Note - we've devised a better method to calculate the emissions (using the Eurocontrol Small Emitters tool data). I haven't yet updated this code and it's slightly convoluted so I wouldn't recommend using it. I will update it soon but in the meantime see the [ODI Leeds flight data repo](https://github.com/odileeds/flight-data) for updated instructions and the new data format.**
+
 ## Setup
 1. Clone this repo
 2. You'll probably want to delete all the files in the data folder to avoid confusion.
