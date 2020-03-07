@@ -1,4 +1,8 @@
 # Leeds Bradford Airport Flight Emissions Data
+
+
+### **Important Note - we've devised a better method to calculate the emissions (using the Eurocontrol Small Emitters tool data). I haven't yet updated this code and it's slightly convoluted so I wouldn't recommend using it. I will update it soon but in the meantime see the [ODI Leeds flight data repo](https://github.com/odileeds/flight-data) for updated instructions and the new data format.**
+
 This is a simple utility which runs daily, retrieving daily departures from Leeds Bradford Airport, and estimates the carbon emissions from each flight, based on the distance and aircraft model.
 
 The data is displayed on my flight emissions website, but you can also download the raw data from the data folder, to do whatever you want with it.
