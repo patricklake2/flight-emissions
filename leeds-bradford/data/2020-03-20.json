@@ -1,0 +1,173 @@
+{
+  "from": {
+    "n": "Leeds Bradford",
+    "IATA": "LBA",
+    "geo": [-1.66057,53.8659],
+    "cc": "GB",
+    "continent": "EU"
+  },
+  "flights": [
+    {
+      "id": "KL1540",
+      "time": "2020-03-20T06:10:00Z",
+      "airline": "KLM",
+      "aircraft": {"code": "E190", "name": "EMBRAER ERJ190"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 10.2, "kg": 4717.13}
+    },
+    {
+      "id": "FR153",
+      "time": "2020-03-20T06:30:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.5, "kg": 3539.5}
+    },
+    {
+      "id": "LS285",
+      "time": "2020-03-20T08:00:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Geneva", "IATA": "GVA", "geo": [6.10895,46.2381], "cc": "CH", "continent": "EU"},
+      "km": 1012.15,
+      "emissions": {"f": 11.5, "kg": 11639.67}
+    },
+    {
+      "id": "EI3391",
+      "time": "2020-03-20T08:25:00Z",
+      "airline": "Aer Lingus",
+      "aircraft": {"code": "AT72", "name": "ATR72 200/500/600"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 5.2, "kg": 1600.47}
+    },
+    {
+      "id": "LS431",
+      "time": "2020-03-20T08:30:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Budapest", "IATA": "BUD", "geo": [19.26109,47.42976], "cc": "HU", "continent": "EU"},
+      "km": 1631.32,
+      "emissions": {"f": 11.5, "kg": 18760.18}
+    },
+    {
+      "id": "FR2332",
+      "time": "2020-03-20T09:30:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Krakow", "IATA": "KRK", "geo": [19.7848,50.0777], "cc": "PL", "continent": "EU"},
+      "km": 1521.58,
+      "emissions": {"f": 11.5, "kg": 17498.21}
+    },
+    {
+      "id": "LS251",
+      "time": "2020-03-20T09:35:00Z",
+      "airline": "Jet2.com",
+      "aircraft": {"code": "B733", "name": "BOEING 737-300"},
+      "to": {"n": "Faro", "IATA": "FAO", "geo": [-7.96591,37.0144], "cc": "PT", "continent": "EU"},
+      "km": 1935.42,
+      "emissions": {"f": 11.6, "kg": 22450.82}
+    },
+    {
+      "id": "KL1546",
+      "time": "2020-03-20T10:00:00Z",
+      "airline": "KLM",
+      "aircraft": {"code": "E190", "name": "EMBRAER ERJ190"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 10.2, "kg": 4717.13}
+    },
+    {
+      "id": "T37600",
+      "time": "2020-03-20T11:10:00Z",
+      "airline": "Eastern Airways",
+      "aircraft": {"code": "", "name": ""},
+      "to": {"n": "Southampton", "IATA": "SOU", "geo": [-1.3568,50.9503], "cc": "GB", "continent": "EU"},
+      "km": 324.85,
+      "emissions": {"f": 11.1, "kg": 3605.87}
+    },
+    {
+      "id": "BA1347",
+      "time": "2020-03-20T11:20:00Z",
+      "airline": "British Airways",
+      "aircraft": {"code": "A319", "name": "AIRBUS A319"},
+      "to": {"n": "London Heathrow", "IATA": "LHR", "geo": [-0.46194,51.4706], "cc": "GB", "continent": "EU"},
+      "km": 278.33,
+      "emissions": {"f": 14.9, "kg": 4147.09}
+    },
+    {
+      "id": "FR1503",
+      "time": "2020-03-20T12:10:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Gdansk", "IATA": "GDN", "geo": [18.4662,54.3776], "cc": "PL", "continent": "EU"},
+      "km": 1308.38,
+      "emissions": {"f": 11.5, "kg": 15046.33}
+    },
+    {
+      "id": "FR2446",
+      "time": "2020-03-20T12:20:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Malaga", "IATA": "AGP", "geo": [-4.49911,36.6749], "cc": "ES", "continent": "EU"},
+      "km": 1924.02,
+      "emissions": {"f": 11.5, "kg": 22126.24}
+    },
+    {
+      "id": "EI3393",
+      "time": "2020-03-20T15:40:00Z",
+      "airline": "Aer Lingus",
+      "aircraft": {"code": "", "name": ""},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.8, "kg": 3631.84}
+    },
+    {
+      "id": "FR9079",
+      "time": "2020-03-20T15:40:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Alicante", "IATA": "ALC", "geo": [-0.55816,38.2822], "cc": "ES", "continent": "EU"},
+      "km": 1734.86,
+      "emissions": {"f": 11.5, "kg": 19950.88}
+    },
+    {
+      "id": "T37606",
+      "time": "2020-03-20T16:10:00Z",
+      "airline": "Eastern Airways",
+      "aircraft": {"code": "", "name": ""},
+      "to": {"n": "Southampton", "IATA": "SOU", "geo": [-1.3568,50.9503], "cc": "GB", "continent": "EU"},
+      "km": 324.85,
+      "emissions": {"f": 11.1, "kg": 3605.87}
+    },
+    {
+      "id": "FR4107",
+      "time": "2020-03-20T18:55:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Wroclaw", "IATA": "WRO", "geo": [16.8858,51.1027], "cc": "PL", "continent": "EU"},
+      "km": 1288.83,
+      "emissions": {"f": 11.5, "kg": 14821.57}
+    },
+    {
+      "id": "EI3395",
+      "time": "2020-03-20T19:00:00Z",
+      "airline": "Aer Lingus",
+      "aircraft": {"code": "", "name": ""},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.8, "kg": 3631.84}
+    },
+    {
+      "id": "FR157",
+      "time": "2020-03-20T19:35:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.5, "kg": 3539.5}
+    }
+  ]
+}
