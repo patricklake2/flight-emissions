@@ -1,0 +1,74 @@
+{
+  "from": {
+    "n": "Leeds Bradford",
+    "IATA": "LBA",
+    "geo": [-1.66057,53.8659],
+    "cc": "GB",
+    "continent": "EU"
+  },
+  "flights": [
+    {
+      "id": "FR153",
+      "time": "2020-03-24T06:30:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.5, "kg": 3539.5}
+    },
+    {
+      "id": "EI3391",
+      "time": "2020-03-24T08:25:00Z",
+      "airline": "Aer Lingus",
+      "aircraft": {"code": "AT72", "name": "ATR72 200/500/600"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 5.2, "kg": 1600.47}
+    },
+    {
+      "id": "KL1546",
+      "time": "2020-03-24T10:00:00Z",
+      "airline": "KLM",
+      "aircraft": {"code": "E190", "name": "EMBRAER ERJ190"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 10.2, "kg": 4717.13}
+    },
+    {
+      "id": "T37600",
+      "time": "2020-03-24T10:10:00Z",
+      "airline": "Eastern Airways",
+      "aircraft": {"code": "", "name": ""},
+      "to": {"n": "Southampton", "IATA": "SOU", "geo": [-1.3568,50.9503], "cc": "GB", "continent": "EU"},
+      "km": 324.85,
+      "emissions": {"f": 11.1, "kg": 3605.87}
+    },
+    {
+      "id": "T37604",
+      "time": "2020-03-24T13:10:00Z",
+      "airline": "Eastern Airways",
+      "aircraft": {"code": "", "name": ""},
+      "to": {"n": "Southampton", "IATA": "SOU", "geo": [-1.3568,50.9503], "cc": "GB", "continent": "EU"},
+      "km": 324.85,
+      "emissions": {"f": 11.1, "kg": 3605.87}
+    },
+    {
+      "id": "T37606",
+      "time": "2020-03-24T17:10:00Z",
+      "airline": "Eastern Airways",
+      "aircraft": {"code": "", "name": ""},
+      "to": {"n": "Southampton", "IATA": "SOU", "geo": [-1.3568,50.9503], "cc": "GB", "continent": "EU"},
+      "km": 324.85,
+      "emissions": {"f": 11.1, "kg": 3605.87}
+    },
+    {
+      "id": "FR157",
+      "time": "2020-03-24T19:25:00Z",
+      "airline": "Ryanair",
+      "aircraft": {"code": "B738", "name": "BOEING 737-800"},
+      "to": {"n": "Dublin", "IATA": "DUB", "geo": [-6.27007,53.4213], "cc": "IE", "continent": "EU"},
+      "km": 307.78,
+      "emissions": {"f": 11.5, "kg": 3539.5}
+    }
+  ]
+}
