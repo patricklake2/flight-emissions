@@ -1,0 +1,29 @@
+{
+  "from": {
+    "n": "Leeds Bradford",
+    "IATA": "LBA",
+    "geo": [-1.66057,53.8659],
+    "cc": "GB",
+    "continent": "EU"
+  },
+  "flights": [
+    {
+      "id": "KL1546",
+      "time": "2020-03-28T09:50:00Z",
+      "airline": "KLM",
+      "aircraft": {"code": "E190", "name": "EMBRAER ERJ190"},
+      "to": {"n": "Amsterdam", "IATA": "AMS", "geo": [4.76389,52.3086], "cc": "NL", "continent": "EU"},
+      "km": 462.46,
+      "emissions": {"f": 10.2, "kg": 4717.13}
+    },
+    {
+      "id": "BA1347",
+      "time": "2020-03-28T11:10:00Z",
+      "airline": "British Airways",
+      "aircraft": {"code": "A319", "name": "AIRBUS A319"},
+      "to": {"n": "London Heathrow", "IATA": "LHR", "geo": [-0.46194,51.4706], "cc": "GB", "continent": "EU"},
+      "km": 278.33,
+      "emissions": {"f": 14.9, "kg": 4147.09}
+    }
+  ]
+}
