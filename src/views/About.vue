@@ -16,9 +16,9 @@
 
     <p>
       The tool is powered by our
-      <a href="https://github.com/odileeds/flight-data"
-        >flight data index on GitHub</a
-      >. Anyone can volunteer to collect flight data for a specific airport,
+      <a
+        href="https://github.com/odileeds/flight-data"
+      >flight data index on GitHub</a>. Anyone can volunteer to collect flight data for a specific airport,
       which they are responsible for hosting - they can then add the link to our
       centralised index, and the airport will be automatically added to this
       site.
@@ -28,20 +28,13 @@
 
     <p>
       We host a centralised
-      <a href="https://github.com/odileeds/flight-data"
-        >flight data GitHub repo</a
-      >, which simply contains an index with a list of airports data is being
+      <a
+        href="https://github.com/odileeds/flight-data"
+      >flight data GitHub repo</a>, which simply contains an index with a list of airports data is being
       collected for, and where this data is stored. Anyone can volunteer to
       collect flight data for a specific airport, which they are responsible for
       hosting - they can then add the link to our index file, and the airport
-      will be automatically added to this site. You can see our
-      <a
-        href="https://github.com/patricklake2/flight-emissions/tree/master/leeds-bradford"
-        >sample methodology and code for Leeds Bradford Airport on GitHub.</a
-      ><strong>
-        All of the data is freely available for anyone to access and
-        reuse.</strong
-      >
+      will be automatically added to this site.
     </p>
 
     <h4>Sources</h4>
@@ -87,9 +80,3 @@
     </p>
   </div>
 </template>
-
-<script>
-export default {
-  name: "about"
-};
-</script>

@@ -11,6 +11,7 @@ temp/
 #vue stuff
 node_modules
 /dist
+/docs
 
 # local env files
 .env.local

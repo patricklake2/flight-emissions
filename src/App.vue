@@ -1,117 +1,96 @@
 <template>
-  <div>
-    <nav-bar />
+  <article id="app">
+    <v-header />
     <div id="main">
       <div class="seasonal">
         <div class="holder">
           <h1>Flight Emissions</h1>
-          <select v-model="iata" class="button c14-bg">
-            <option disabled>Pick an airport...</option>
+          <select
+            v-model="queryParam"
+            class="button c14-bg"
+          >
+            <option disabled>
+              Pick an airport...
+            </option>
             <option
-              v-for="item in $root.rootIndex"
-              :key="item.IATA"
-              :value="item.IATA"
-              >{{ item.name }}</option
+              v-for="(entry, i) in index"
+              :key="i"
+              :value="entry.IATA"
             >
+              {{ entry.name }}
+            </option>
           </select>
         </div>
       </div>
-      <div class="holder" v-if="!iata && !$route.path.startsWith('/about')">
-        <p>Please select an airport above.</p>
-      </div>
       <router-view
-        v-if="iata || $route.path.startsWith('/about')"
+        v-if="loaded || $route.path.startsWith('/about')"
         :flights="flights"
-        :from="from"
-      ></router-view>
-    </div>
-    <footer class="b1-bg">
-      <div class="holder">
-        <ul>
-          <li>
-            <strong>&copy; Patrick Lake, ODI Leeds 2019</strong>
-          </li>
-          <li>
-            Flight Data -
-            <a href="https://www.leedsbradfordairport.co.uk/"
-              >Leeds Bradford Airport</a
-            >
-            &amp;
-            <a href="https://uk.flightaware.com/">FlightAware API</a>
-          </li>
-          <li>
-            Airport Data -
-            <a href="https://openflights.org">OpenFlights</a>
-          </li>
-          <li>
-            Comparisons based on figures from the book "How bad are Bananas?" -
-            &copy; Mike Berners-Lee
-          </li>
-        </ul>
+        :meta="meta"
+        :origin="origin"
+      />
+      <div
+        v-if="!loaded && !$route.path.startsWith('/about')"
+        class="holder"
+      >
+        <h2>
+          Please select an Airport above
+        </h2>
       </div>
-    </footer>
-  </div>
+    </div>
+    <v-footer />
+  </article>
 </template>
 
-<script>
-import NavBar from "./components/NavBar.vue";
-import axios from "axios";
+<script lang="ts">
+import { Vue, Component, Watch } from 'vue-property-decorator';
+import VHeader from './components/VHeader.vue';
+import VFooter from './components/VFooter.vue';
 
-export default {
-  components: {
-    NavBar
-  },
-  data() {
-    return {
-      meta: {},
-      from: {},
-      flights: []
-    };
-  },
-  methods: {
-    async updateData() {
-      if (this.$route.query.from) {
-        let q = this.$route.query.from.toUpperCase();
-        let entry = this.$root.rootIndex.find(item => item.IATA === q);
-        if (entry) {
-          const metaResponse = await axios.get(entry.index);
-          this.meta = metaResponse.data;
-          let flightDataURL = `${
-            this.meta.directory
-          }${this.meta.lastupdate.substring(0, 10)}.json`;
-          const flightsResponse = await axios.get(flightDataURL);
-          this.flights = flightsResponse.data.flights;
-          this.from = flightsResponse.data.from;
-        } else this.$router.push(this.$route.path);
-      }
+import { Flight, IndexEntry, Location, Metadata, RawFlightData } from './resources/models';
+import { getFlightData, getIndex, getMetadata } from './resources/utils';
+
+@Component({
+    components: { VHeader, VFooter },
+})
+export default class App extends Vue {
+    index: IndexEntry[] = [];
+    meta: Metadata = {} as Metadata;
+    origin: Location = {} as Location;
+    flights: Flight[] = [];
+    loaded = false;
+
+    mounted(): void {
+        getIndex('https://raw.githubusercontent.com/odileeds/flight-data/master/index.json').then((data: IndexEntry[]) => {
+            this.index = data;
+            if(this.$route.query.from) this.setAirportFromQuery();
+        });
     }
-  },
-  computed: {
-    iata: {
-      get() {
-        if (this.$route.query.from) return this.$route.query.from.toUpperCase();
-        else return null;
-      },
-      set(newVal) {
-        this.$router.push({ query: { ...this.$route.query, from: newVal } });
-      }
+
+    @Watch('$route.query.from')
+    onQueryChange(): void {
+      if(this.$route.query.from)
+        this.setAirportFromQuery();
     }
-  },
-  watch: {
-    "$route.query.from": function() {
-      this.updateData();
+
+    async setAirportFromQuery(): Promise<void> {
+        try {
+            this.meta = await getMetadata(this.index, this.$route.query.from as string);
+            const flightData: RawFlightData = await getFlightData(this.meta, this.meta.lastupdate);
+            this.origin = flightData.from;
+            this.flights = flightData.flights;
+            this.loaded = true;
+        } catch(e) {
+            console.log(e);
+        }
     }
-  },
-  mounted() {
-    this.updateData();
-  }
-};
+    
+    get queryParam(): string { return this.$route.query.from as string; }
+    set queryParam(newVal: string) { this.$router.push({ query: {...this.$route.query, from: newVal } } ); }
+}
 </script>
 
-<style scoped>
-.seasonal {
-  overflow: auto;
-}
+<style>
+@import url("https://odileeds.org/resources/style.css");
 h1 {
   display: inline-block;
   vertical-align: top;
@@ -120,6 +99,8 @@ select {
   float: right;
   -webkit-appearance: menulist-button;
   -moz-appearance: menulist;
+  /* position: relative;
+  bottom: 5px; */
 }
 @media only screen and (max-width: 500px) {
   .seasonal {

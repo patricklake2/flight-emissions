@@ -1,10 +1,29 @@
-# [Flight Emissions](https://patricklake2.github.io/flight-emissions-viewer)
-We built this tool to demonstrate the impact flights have on the environment, since international flights aren't are not included in local or national carbon budgets (even though they account for roughly 95% of total aviation emissions). 
+# flight-emissions-2.0
 
-We've started with Leeds Bradford Airport, but anyone can add an airport.
+## Project setup
+```
+npm install
+```
 
-## How to Contribute
-See the [ODI Leeds Flight Data repo](https://github.com/odileeds/flight-data) for instructions on how to add an airport. 
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-## Website
-The website is build using Vue. It's currently fairly basic, but you're welcome to make improvements and open a pull request.
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your unit tests
+```
+npm run test:unit
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

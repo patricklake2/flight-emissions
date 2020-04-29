@@ -1,30 +1,28 @@
-<template>
-  <span>{{ tweeningValue }}</span>
-</template>
-
 <script>
-import TWEEN from "@tweenjs/tween.js";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import TWEEN from '@tweenjs/tween.js';
+
 export default {
-  name: "animated-number",
+  name: 'AnimatedNumber',
   props: {
     value: {
       type: Number,
-      required: true
+      required: true,
     },
     duration: {
       type: Number,
-      default: 500
-    }
+      default: 500,
+    },
   },
   data: function() {
     return {
-      tweeningValue: null
+      tweeningValue: null,
     };
   },
   watch: {
     value: function(newValue, oldValue) {
       this.tween(oldValue, newValue);
-    }
+    },
   },
   beforeMount() {
     this.tweeningValue = 0;
@@ -34,7 +32,8 @@ export default {
   },
   methods: {
     tween: function(startValue, endValue) {
-      var vm = this;
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      const vm = this;
 
       function animate() {
         if (TWEEN.update()) {
@@ -42,20 +41,23 @@ export default {
         }
       }
       new TWEEN.Tween({
-        tweeningValue: startValue
+        tweeningValue: startValue,
       })
         .to(
           {
-            tweeningValue: endValue
+            tweeningValue: endValue,
           },
-          vm.duration
+          vm.duration,
         )
         .onUpdate(function(object) {
           vm.tweeningValue = Math.round(object.tweeningValue).toLocaleString();
         })
         .start();
       animate();
-    }
-  }
+    },
+  },
+  render(createElement) {
+    return createElement('span', this.tweeningValue);
+  },
 };
 </script>
