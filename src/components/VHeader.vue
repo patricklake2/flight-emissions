@@ -50,7 +50,7 @@
 export default {
     computed: {
         // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-        routerLinks() { return this.$router.options.routes; },
+        routerLinks() { return this.$router.options.routes.filter(route => route.name); }, //only show named routes in navigation bar
     },
 };
 </script>
