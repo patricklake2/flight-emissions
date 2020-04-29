@@ -28,7 +28,7 @@ jobs:
       env: 
         HOST: ${{ secrets.HOST }}
         PORT: 22
-        USERNAME: ${{ secrets.USER }}
+        USERNAME: "odi"
         KEY: ${{ secrets.KEY }}
       with:
         source: "docs"
