@@ -33,6 +33,5 @@ jobs:
         SOURCE: "./docs/"
         TARGET: "/home/odi/www/odileeds.org/projects/flight-emissions/daily-v2/"
         RM: true
-      with:
-        strip_components: 1  
+        INPUT_STRIP_COMPONENTS: 1
 
