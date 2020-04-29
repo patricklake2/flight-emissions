@@ -23,7 +23,7 @@ jobs:
         npm ci
         npm test
         npm run build
-        mv docs daily-v2
+        mv docs daily
     - name: Deploy to ODI Webserver
       uses: appleboy/scp-action@v0.0.1
       env: 
@@ -33,6 +33,7 @@ jobs:
         KEY: ${{ secrets.KEY }}
         SOURCE: "daily-v2"
         TARGET: "/home/odi/www/odileeds.org/projects/flight-emissions/"
+        OVERWRITE: true
 
         
 
