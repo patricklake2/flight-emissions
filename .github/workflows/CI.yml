@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Build & Deploy
 
 on:
   push:
@@ -18,11 +18,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: "13.13"
-    - run: npm ci
-    - name: Run unit tests and build
+    - name: Run CI, tests, and build
       run: |
+        npm ci
         npm test
         npm run build
+        mv docs daily-v2
     - name: Deploy to ODI Webserver
       uses: appleboy/scp-action@v0.0.1
       env: 
@@ -30,11 +31,8 @@ jobs:
         PORT: 22
         USERNAME: "odi"
         KEY: ${{ secrets.KEY }}
-        SOURCE: "docs/*"
-        TARGET: "/home/odi/www/odileeds.org/projects/flight-emissions/daily-v2/"
-        STRIP_COMPONENTS: 1
-        RM: true
-      with: 
-        strip_components: 1
+        SOURCE: "daily-v2"
+        TARGET: "/home/odi/www/odileeds.org/projects/flight-emissions/"
+
         
 
