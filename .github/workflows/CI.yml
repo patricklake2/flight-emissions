@@ -32,6 +32,6 @@ jobs:
         KEY: ${{ secrets.KEY }}
         SOURCE: "./docs/"
         TARGET: "/home/odi/www/odileeds.org/projects/flight-emissions/daily-v2/"
-        STRIP_COMPONENTS: 1
+        STRIP_COMPONENTS: 2
         RM: true
 
