@@ -17,6 +17,6 @@ const routes: RouteConfig[] = [
 
 export default new VueRouter({
     routes,
-    base: '/projects/flight-emissions/daily-v2/',
+    base: '/projects/flight-emissions/daily/',
     mode: 'history',
 });
