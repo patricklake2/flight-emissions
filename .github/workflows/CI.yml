@@ -25,10 +25,12 @@ jobs:
         npm run build
     - name: Deploy to ODI Webserver
       uses: appleboy/scp-action@v0.0.1
-      with: 
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USER }}
-        key: ${{ secrets.KEY }}
+      env: 
+        HOST: ${{ secrets.HOST }}
+        PORT: 22
+        USERNAME: ${{ secrets.USER }}
+        KEY: ${{ secrets.KEY }}
+      with:
         source: docs
         target: /home/odi/www/odileeds.org/projects/flight-emissions/daily-v2
         strip_components: 1
