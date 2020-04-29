@@ -30,8 +30,9 @@ jobs:
         PORT: 22
         USERNAME: "odi"
         KEY: ${{ secrets.KEY }}
-        SOURCE: "docs/"
-        TARGET: "/home/odi/www/odileeds.org/projects/flight-emissions/daily-v2"
-        STRIP_COMPONENTS: 1
-        RM: true
+      with: 
+        source: "./docs/"
+        target: "/home/odi/www/odileeds.org/projects/flight-emissions/daily-v2/"
+        strip_components: 1
+        rm: true
 
