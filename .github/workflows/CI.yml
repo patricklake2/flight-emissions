@@ -17,7 +17,7 @@ jobs:
     - name: Setup Node v13.13 and install dependencies
       uses: actions/setup-node@v1
       with:
-        node-version: '13.13'
+        node-version: "13.13"
     - run: npm ci
     - name: Run unit tests and build
       run: |
@@ -31,8 +31,8 @@ jobs:
         USERNAME: ${{ secrets.USER }}
         KEY: ${{ secrets.KEY }}
       with:
-        source: docs
-        target: /home/odi/www/odileeds.org/projects/flight-emissions/daily-v2
+        source: "docs"
+        target: "/home/odi/www/odileeds.org/projects/flight-emissions/daily-v2"
         strip_components: 1
         rm: true
 
