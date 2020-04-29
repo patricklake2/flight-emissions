@@ -31,7 +31,7 @@ jobs:
         PORT: 22
         USERNAME: "odi"
         KEY: ${{ secrets.KEY }}
-        SOURCE: "daily-v2"
+        SOURCE: "daily"
         TARGET: "/home/odi/www/odileeds.org/projects/flight-emissions/"
         OVERWRITE: true
 
