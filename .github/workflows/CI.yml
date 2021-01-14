@@ -6,37 +6,32 @@ name: Node.js CI
 on:
   push:
     branches: [ master ]
-    paths:
-      - 'src/**'
-      - 'public/**'
 
 jobs:
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Setup Node v13.13 and install dependencies
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
-        node-version: "13.13"
-    - name: Run CI, tests, and build
+        node-version: '14'
+
+    - name: Install dependencies and build
       run: |
-        npm ci
-        npm test
+        npm install
         npm run build
-        mv docs daily
-    - name: Deploy to ODI Webserver
-      uses: appleboy/scp-action@v0.0.1
-      env: 
-        HOST: ${{ secrets.HOST }}
-        PORT: 22
-        USERNAME: "odi"
-        KEY: ${{ secrets.KEY }}
-        SOURCE: "daily"
-        TARGET: "/home/odi/www/odileeds.org/projects/flight-emissions/"
-        OVERWRITE: true
+
+    - name: Sync
+      env:
+        dest: 'odi@onza.mythic-beasts.com:/home/odi/www/odileeds.org/projects/flight-emissions/daily/'
+      run: |
+        echo "${{secrets.DEPLOY_KEY}}" > deploy_key
+        chmod 600 ./deploy_key
+        rsync -av --delete -e 'ssh -i ./deploy_key -o StrictHostKeyChecking=no' ./docs/ ${{env.dest}}
+        rm -f deploy_key
 
         
 
