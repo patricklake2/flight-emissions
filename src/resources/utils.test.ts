@@ -26,7 +26,7 @@ describe('Retrieving index, metadata & flights should work correctly', () => {
     test('Retrieving metadata for LBA should work', async () => {
         meta = await getMetadata(index, 'LBA');
         expect(meta).toBeInstanceOf(Object);
-        expect(meta).toHaveProperty('directory', 'https://raw.githubusercontent.com/patricklake2/flight-data/master/LBA/');
+        expect(meta).toHaveProperty('directory', 'https://raw.githubusercontent.com/patricklake2/flight-data/master/data/');
         expect(meta).toHaveProperty('flights');
         expect(meta).toHaveProperty('emissions');
         expect(meta).toHaveProperty('dates');
