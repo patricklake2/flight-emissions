@@ -3,7 +3,6 @@ import App from './App.vue';
 import router from './router';
 
 ODI.log.setup({ id: 'odileeds' });
-ODI.log.add('action=view');
 
 new Vue({
   router,
