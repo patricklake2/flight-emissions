@@ -15,8 +15,16 @@ const routes: RouteConfig[] = [
     { path: '*', redirect: '/' },
 ];
 
-export default new VueRouter({
+const router = new VueRouter({
     routes,
     base: '/projects/flight-emissions/daily/',
     mode: 'history',
 });
+
+router.afterEach(() => {
+    Vue.nextTick().then(() => {
+        ODI.log.add('action=view');
+    });
+});
+
+export default router;
